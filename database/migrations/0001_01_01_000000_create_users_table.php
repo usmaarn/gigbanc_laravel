@@ -14,13 +14,10 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('phone_number')->unique();
+            $table->string('phone')->unique();
             $table->string('email')->unique();
-            $table->string('profession');
+            $table->string('profession')->nullable();
             $table->string('referral_code')->unique();
-            $table->unsignedBigInteger('referrer_id')->nullable();
-            $table->foreign('referrer_id')->references('id')
-                ->on('users')->nullOnDelete();
             $table->integer('type')->default(\App\Enums\UserType::Regular);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

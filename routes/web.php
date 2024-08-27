@@ -1,27 +1,27 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\EnsureUserIsAgent;
+use Inertia\Inertia;
 
-Route::view('/', 'welcome');
+Route::get('/', function () {
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
 
-Route::view('/success', 'success');
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
-
-Route::view('leadership', 'leadership', [
-    'agents' => \App\Models\User::where('type', \App\Enums\UserType::Agent)
-        ->withCount(['referrals' => function (\Illuminate\Database\Eloquent\Builder $query) {
-            $query->whereNot('email_verified_at', null);
-        }])->orderBy('referrals_count', 'desc')->get(),
-    ])
-    ->middleware(['auth', EnsureUserIsAgent::class])
-    ->name('leadership');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 require __DIR__.'/auth.php';
