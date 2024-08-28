@@ -36,6 +36,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::middleware("company")->group(function () {
     //Company
+
     Route::get("/dashboard/ambassadors", [CompanyController::class, "ambassadors"])->name("company.ambassadors");
     Route::post("/dashboard/ambassadors", [CompanyController::class, "addAmbassador"])->name("company.ambassadors");
 });

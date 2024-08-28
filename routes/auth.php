@@ -9,10 +9,14 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\V1\CompanyController;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [\App\Http\Controllers\V1\Auth\RegisterController::class, 'index'])
                 ->name('register');
+
+    Route::get("/{company:username}/register", [CompanyController::class, "register"])->name("company.register");
+    Route::post("/{company:username}/register", [CompanyController::class, "storeAmbassador"])->name("company.register");
 
     Route::post('register', [\App\Http\Controllers\V1\Auth\RegisterController::class, 'store']);
 

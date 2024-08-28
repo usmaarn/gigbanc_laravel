@@ -2,9 +2,12 @@ import {Link, useForm} from "@inertiajs/react";
 import {Button} from "@/Components/ui/button";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/Components/ui/card";
 import {FormButton, FormInput} from "@/Components/form";
+import Guest from "@/Layouts/GuestLayout";
+import {Company} from "@/types/data";
+import {ChangeEvent, FormEvent} from "react";
 
 
-export default function Register() {
+export default function Register({company}: {company: Company}) {
 
     const {data, setData, post, processing, errors} = useForm({
         firstName: "",
@@ -12,34 +15,44 @@ export default function Register() {
         email: "",
         phone: "",
         password: "",
-        passwordConfirmation: "",
-    })
+        password_confirmation: "",
+    });
 
+    function handleSubmit(e: FormEvent) {
+        e.preventDefault();
+        post(route("company.register", company.username))
+    }
+
+    function handleChange(e: ChangeEvent<HTMLInputElement>) {
+        const {name, value} = e.target;
+        setData(name, value);
+    }
 
     return (
-        <section className="w-full max-w-[600px] mx-auto">
-            <form >
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Individual Account</CardTitle>
-                    </CardHeader>
-                    <CardContent className="grid md:grid-cols-2 gap-5">
-                        <FormInput error={errors?.firstName} label="First Name" name="firstName"/>
-                        <FormInput error={errors?.lastName} label="Last Name" name="lastName"/>
-                        <FormInput error={errors?.email} label="Email Address" name="email" type="email"/>
-                        <FormInput error={errors?.phone} label="Phone Number" name="phone" type="tel"/>
-                        <FormInput error={errors?.password} label="Password" name="password" type="password"/>
-                        <FormInput error={errors?.passwordConfirmation} label="Confirm Password"
-                                   name="passwordConfirmation" type="password"/>
-                    </CardContent>
-                    <CardFooter className="space-x-5">
-                        <FormButton type="submit" size="default" className="w-auto">Register</FormButton>
-                        <Link href={route("login")}>
-                            <Button variant="outline">Sign In</Button>
-                        </Link>
-                    </CardFooter>
-                </Card>
-            </form>
-        </section>
+        <Guest>
+            <section className="w-full max-w-[600px] mx-auto">
+                <form onSubmit={handleSubmit}>
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Individual Account</CardTitle>
+                        </CardHeader>
+                        <CardContent className="grid md:grid-cols-2 gap-5">
+                            <FormInput error={errors?.firstName} label="First Name" value={data?.firstName} name="firstName" onChange={handleChange}/>
+                            <FormInput error={errors?.lastName} label="Last Name" name="lastName" value={data?.lastName} onChange={handleChange}/>
+                            <FormInput error={errors?.email} label="Email Address" name="email" type="email" value={data?.email} onChange={handleChange}/>
+                            <FormInput error={errors?.phone} label="Phone Number" name="phone" type="tel" value={data?.phone} onChange={handleChange}/>
+                            <FormInput type="password" error={errors?.password} label="Password"  value={data?.password} name="password" onChange={handleChange}/>
+                            <FormInput type="password" error={errors?.password} label="Password"  value={data?.password_confirmation} name="password_confirmation" onChange={handleChange}/>
+                        </CardContent>
+                        <CardFooter className="space-x-5">
+                            <FormButton type="submit" size="default" className="w-auto">Register</FormButton>
+                            <Link href={route("login")}>
+                                <Button variant="outline">Sign In</Button>
+                            </Link>
+                        </CardFooter>
+                    </Card>
+                </form>
+            </section>
+        </Guest>
     );
 }

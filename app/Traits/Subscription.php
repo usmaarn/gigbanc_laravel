@@ -6,7 +6,7 @@ use App\Models\Subscriber;
 use Illuminate\Database\Eloquent\Collection;
 
 trait Subscription {
-    public function getSubscribers(): Collection
+    public function getSubscribers()
     {
         $subscribers = [];
 
@@ -16,7 +16,7 @@ trait Subscription {
         }
         else{
             $subscribers = Subscriber::with(['organization', 'category'])
-                ->where('company_id', auth()->user()->company->id)->latest()->limit(5)->get();
+                ->where('user_id', auth()->user()->id)->latest()->limit(5)->get();
         }
 
         return $subscribers;

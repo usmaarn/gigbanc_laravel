@@ -6,7 +6,7 @@ use App\Models\Subscriber;
 use Illuminate\Database\Eloquent\Collection;
 
 trait Ambassadors {
-    public function getAmbassadors(): Collection
+    public function getAmbassadors(): Collection|array
     {
         $ambassadors = [];
 
