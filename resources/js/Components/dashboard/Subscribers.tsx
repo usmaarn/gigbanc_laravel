@@ -42,8 +42,8 @@ export default function Subscribers(){
                                 <TableCell>{subscriber?.category?.name}</TableCell>
                                 <TableCell>{subscriber?.organization.name}</TableCell>
                                 <TableCell>
-                                    <Badge variant="destructive" className="whitespace-nowrap">
-                                        {subscriber.status == "5" ? "NOT ONBOARDED" : "ONBOARDED"}
+                                    <Badge variant="secondary" className="whitespace-nowrap">
+                                        {subscriber.status == "5" ? "In Progress" : "Verified"}
                                     </Badge>
                                 </TableCell>
                             </TableRow>
