@@ -56,7 +56,7 @@ export default function Ambassadors({subscribers, auth}: PageProps<{subscribers:
                                     <TableCell>{subscriber?.organization.name}</TableCell>
                                     <TableCell>
                                         <Badge variant="destructive" className="whitespace-nowrap">
-                                            {subscriber.status == "5" ? "Not verified" : "Verified"}
+                                            {subscriber.status == "5" ? "Verified" : "In Progress"}
                                         </Badge>
                                     </TableCell>
                                     <TableCell className="space-x-3">
