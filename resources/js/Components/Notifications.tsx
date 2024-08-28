@@ -1,12 +1,11 @@
-"use client"
 
 import {Icon} from "@iconify/react";
-import {Button} from "@/components/ui/button";
-import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
-import Link from "next/link";
-import {Separator} from "@/components/ui/separator";
 import {Fragment} from "react";
-import {ScrollArea} from "@/components/ui/scroll-area";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/Components/ui/dropdown-menu";
+import {Button} from "@/Components/ui/button";
+import {ScrollArea} from "@/Components/ui/scroll-area";
+import {Link} from "@inertiajs/react";
+import {Separator} from "@/Components/ui/separator";
 
 export default function Notifications() {
     return (

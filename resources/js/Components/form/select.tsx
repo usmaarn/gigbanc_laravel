@@ -1,9 +1,7 @@
-/** @format */
-"use client";
-
-import {Label} from "../ui/label";
+import {Label} from "@/Components/ui/label";
+import {Select, SelectContent, SelectTrigger, SelectValue} from "@/Components/ui/select";
 import {SelectProps} from "@radix-ui/react-select";
-import {Select, SelectContent, SelectTrigger, SelectValue} from "@/components/ui/select";
+
 
 export default function Slt({children, label, error, ...props}: SelectProps & {
     label: string; error?: string

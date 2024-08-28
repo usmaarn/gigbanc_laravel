@@ -1,6 +1,3 @@
-/** @format */
-"use client"
-
 import {Link} from "@inertiajs/react";
 
 export default function ApplicationLogo({name, className}: {name?: string, className?: string}) {

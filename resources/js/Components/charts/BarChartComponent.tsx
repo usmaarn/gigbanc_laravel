@@ -1,22 +1,8 @@
-"use client"
+import {ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent} from "@/Components/ui/chart";
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/Components/ui/card";
+import {Bar, BarChart, CartesianGrid, XAxis} from "recharts";
+import {TrendingUp} from "lucide-react";
 
-import { TrendingUp } from "lucide-react"
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
-
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
-import {
-    ChartConfig,
-    ChartContainer,
-    ChartTooltip,
-    ChartTooltipContent,
-} from "@/components/ui/chart"
 const chartData = [
     { month: "January", desktop: 186 },
     { month: "February", desktop: 305 },

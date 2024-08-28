@@ -1,8 +1,6 @@
-/** @format */
-"use client";
 
 import {Label} from "../ui/label";
-import {Textarea, TextareaProps} from "@/components/ui/textarea";
+import {Textarea, TextareaProps} from "@/Components/ui/textarea";
 
 export default function TextField({
   children,
@@ -22,7 +20,7 @@ export default function TextField({
         {...props}
         className={`
             ${error && "border-red-500 focus-visible:ring-red-500 text-red-500"}
-            
+
         `}
       />
       {error && (

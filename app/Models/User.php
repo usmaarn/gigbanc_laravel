@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -23,10 +24,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'first_name',
         'last_name',
         'email',
-        'phone_number',
+        "username",
+        'phone',
         "profession",
         "referral_code",
-        "referrer_id",
         'password',
         'type',
         'email_verified_at'
@@ -65,8 +66,18 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(User::class);
     }
 
-    public function isAgent()
+    public function isAmbassador()
     {
-        return $this->type = UserType::Agent;
+        return $this->type == UserType::Ambassador->value;
+    }
+
+    public function isCompany()
+    {
+        return $this->type == UserType::Organization->value;
+    }
+
+    public function company(): HasOne
+    {
+        return $this->hasOne(Company::class);
     }
 }

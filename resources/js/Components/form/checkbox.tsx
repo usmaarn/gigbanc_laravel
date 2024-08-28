@@ -1,9 +1,6 @@
-/** @format */
+import {CheckboxProps} from "@radix-ui/react-checkbox";
+import {Checkbox} from "@/Components/ui/checkbox";
 
-"use client";
-
-import { Checkbox } from "@/components/ui/checkbox";
-import { CheckboxProps } from "@radix-ui/react-checkbox";
 
 export default function Cb({
   id,

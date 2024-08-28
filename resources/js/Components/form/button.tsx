@@ -1,25 +1,23 @@
-/** @format */
 
-import { useFormStatus } from "react-dom";
-import { Button, ButtonProps } from "../ui/button";
 import { Loader } from "lucide-react";
+import {Button, ButtonProps} from "@/Components/ui/button";
 
 export default function Btn({
   children,
   className,
   disabled,
+    loading,
   ...props
-}: ButtonProps) {
-  const { pending } = useFormStatus();
+}: ButtonProps & {loading?: boolean}) {
 
   return (
     <Button
       className={`w-full ${className}`}
       size="lg"
       {...props}
-      disabled={disabled ?? pending}
+      disabled={disabled ?? loading}
     >
-      {pending ? <Loader className="animate-spin" /> : children}
+      {loading ? <Loader className="animate-spin" /> : children}
     </Button>
   );
 }
