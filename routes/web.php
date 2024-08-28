@@ -5,6 +5,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\V1\DashboardController;
+use App\Http\Controllers\V1\CompanyController;
+use App\Http\Controllers\V1\SubscribersController;
 
 
 Route::get('/', function () {
@@ -17,12 +19,25 @@ Route::get('/', function () {
 });
 
 
-Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard");
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get("", [DashboardController::class, "index"])->name("dashboard");
+    Route::prefix("/dashboard")->name("dashboard.")->group(function () {
+        Route::get("/subscribers", [SubscribersController::class, 'index'])->name("subscribers");
+        Route::post("/subscribers", [SubscribersController::class, 'store'])->name("subscribers")
+        ->middleware("agent");
+    });
+});
+
+Route::middleware("company")->group(function () {
+    //Company
+    Route::get("/dashboard/ambassadors", [CompanyController::class, "ambassadors"])->name("company.ambassadors");
+    Route::post("/dashboard/ambassadors", [CompanyController::class, "addAmbassador"])->name("company.ambassadors");
 });
 
 require __DIR__.'/auth.php';

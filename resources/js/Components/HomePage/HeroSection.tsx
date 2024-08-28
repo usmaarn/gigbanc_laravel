@@ -3,7 +3,7 @@ import {PageProps} from "@/types";
 import {Button} from "@/Components/ui/button";
 
 export default function HeroSection({name}: {name?: string}) {
-  const {auth}: PageProps = usePage();
+  const {auth}: PageProps = usePage().props;
 
   return (
     <section
@@ -16,7 +16,7 @@ export default function HeroSection({name}: {name?: string}) {
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
         {auth?.user ? (
-          <Link href="/dashboard">
+          <Link href={route("dashboard")}>
             <Button size="lg" className="font-bold">
               Access Dashboard
             </Button>

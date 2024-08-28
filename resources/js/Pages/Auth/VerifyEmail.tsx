@@ -23,9 +23,12 @@ export default function VerifyEmail() {
                 </CardHeader>
                 <CardContent>
                     <form className="max-w-[300px]" onSubmit={handleSubmit}>
-                        <p className="text-lg mb-5">Please verify your email to start using this service</p>
+                        {sent
+                            ? <p className="text-lg mb-5 text-green-600">A verification link has been sent to your email address</p>
+                            : <p className="text-lg mb-5">Please verify your email to start using this service</p>
+                        }
                         <FormButton className="inline-block" loading={processing}>
-                            {sent ? "Resend Verification Link" : "Send Verification Link"}
+                        {sent ? "Resend Verification Link" : "Send Verification Link"}
                         </FormButton>
                     </form>
                 </CardContent>

@@ -6,7 +6,7 @@ import {PageProps} from "@/types";
 
 
 export default function Navbar({name}: {name?: string}) {
-    const {auth}: PageProps = usePage();
+    const {auth}: PageProps = usePage().props;
 
   return (
     <header className="h-[80px] border-b bg-white">

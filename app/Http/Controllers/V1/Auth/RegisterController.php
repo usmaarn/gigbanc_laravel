@@ -8,7 +8,6 @@ use App\Http\Requests\V1\Auth\CreateCompanyAccountRequest;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +18,7 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Auth/Register/Index');
+        return Inertia::render('Auth/Register');
     }
 
     public function store(CreateCompanyAccountRequest $request)

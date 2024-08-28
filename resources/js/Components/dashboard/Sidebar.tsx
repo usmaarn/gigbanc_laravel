@@ -25,18 +25,23 @@ export default function Sidebar({open, onClose}: {
                 <SidebarMenuGroup label="Panel">
                     <SidebarItem label="Dashboard" icon="material-symbols:leaderboard-outline" href={route("dashboard")}/>
                     {auth.isCompany && <SidebarItem label="Ambassadors" icon="material-symbols:leaderboard-outline"
-                                  href={route("dashboard")}/>}
-                    {<SidebarItem label="Subscribers" icon="material-symbols:leaderboard-outline"
+                                  href={route("company.ambassadors")}/>}
+                    <SidebarItem label="Subscribers" icon="material-symbols:leaderboard-outline"
+                                  href={route("dashboard.subscribers")}/>
+                    {!auth.isCompany &&
+                        <SidebarItem label="Organizations" icon="material-symbols:leaderboard-outline"
                                   href={route("dashboard")}/>}
                 </SidebarMenuGroup>
 
-                <SidebarMenuGroup label="My Company">
-                    <SidebarItem label="Complains" icon="material-symbols:leaderboard-outline" href={route('dashboard')}/>
-                </SidebarMenuGroup>
+                {auth?.isCompany &&
+                    <SidebarMenuGroup label="My Company">
+                        <SidebarItem label="Complains" icon="material-symbols:leaderboard-outline" href={route('dashboard')}/>
+                    </SidebarMenuGroup>
+                }
 
                 <SidebarMenuGroup label="Settings" className="mt-auto">
                     <SidebarItem label="Account Settings" icon="codicon:account" href={route('dashboard')}/>
-                    <SidebarItem label="Company Settings" icon="codicon:account" href={route('dashboard')}/>
+                    {auth.isCompany && <SidebarItem label="Company Settings" icon="codicon:account" href={route('dashboard')}/>}
                     <form onSubmit={handleSubmit}>
                         <button className={`${styles.sidebarItem} ${styles.logout}`}>
                             <Icon icon="ant-design:logout-outlined" className="mr-2 text-lg"/>

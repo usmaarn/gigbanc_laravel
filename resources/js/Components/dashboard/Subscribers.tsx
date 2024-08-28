@@ -1,19 +1,28 @@
+import {Link, usePage} from "@inertiajs/react";
+import {Subscriber} from "@/types/data";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/Components/ui/card";
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/Components/ui/table";
+import {Badge} from "@/Components/ui/badge";
+import {PageProps} from "@/types";
+import {FormInput} from "@/Components/form";
+import AddSubscriber from "@/Components/modals/AddSubscriber";
 
 
-export default async function Subscribers(){
-    const subscribers = await getCompanySubscribers("bynagro") as Subscriber[] ?? [];
+export default function Subscribers(){
+    const props: PageProps<{subscribers : Subscriber[]}> = usePage().props;
+    const subscribers = props?.subscribers ?? [];
 
     return (
         <Card>
             <CardHeader className="border-b">
-                <CardTitle>Latest Subscribers</CardTitle>
-                <CardDescription>A list of your recent 5 subscribers.</CardDescription>
+                <CardTitle>Subscribers</CardTitle>
+                <CardDescription>A list of all your subscribers.</CardDescription>
             </CardHeader>
             <CardContent>
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>ID</TableHead>
+                            <TableHead>Id</TableHead>
                             <TableHead>Name</TableHead>
                             <TableHead>Email</TableHead>
                             <TableHead>Category</TableHead>
@@ -23,33 +32,31 @@ export default async function Subscribers(){
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {subscribers.map((subscriber, index) => (
-                            <TableRow key={subscriber.id}>
+                        {subscribers.map((subscriber: Subscriber, index) => (
+                            <TableRow key={subscriber?.id}>
                                 <TableCell className="font-medium">{index + 1}</TableCell>
-                                <TableCell className="whitespace-nowrap">{subscriber.name}</TableCell>
-                                <TableCell>{subscriber.email}</TableCell>
-                                <TableCell>{subscriber.type}</TableCell>
-                                <TableCell className="capitalize text-blue-500 font-medium">
-                                    <Link className="hover:underline" href="#">
-                                        {subscriber?.company.name}
-                                    </Link>
+                                <TableCell className="whitespace-nowrap">
+                                    {subscriber.name}
                                 </TableCell>
+                                <TableCell>{subscriber.email}</TableCell>
+                                <TableCell>{subscriber?.category?.name}</TableCell>
+                                <TableCell>{subscriber?.organization.name}</TableCell>
                                 <TableCell>
-                                    <Badge variant="secondary" className={subscriber.status == "onboarded"
-                                        ? "text-green-800 bg-green-100" : "text-red-800 bg-red-100"
-                                    }>
-                                        {subscriber.status}
+                                    <Badge variant="destructive" className="whitespace-nowrap">
+                                        {subscriber.status == "5" ? "NOT ONBOARDED" : "ONBOARDED"}
                                     </Badge>
                                 </TableCell>
-                                <TableCell>
-                                    Edit
+                                <TableCell className="space-x-3">
+                                    <span>Edit</span>
+                                    <span>Delete</span>
+                                    {/*<EditAmbassador subscriber={subscriber} />*/}
+                                    {/*<DeleteAmbassador id={subscriber.id} />*/}
                                 </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </CardContent>
-
         </Card>
     )
 }

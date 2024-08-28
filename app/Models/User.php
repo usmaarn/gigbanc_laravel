@@ -3,14 +3,19 @@
 namespace App\Models;
 
 use App\Enums\UserType;
+use App\Observers\V1\UserObserver;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
+#[ObservedBy(UserObserver::class)]
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
@@ -79,5 +84,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function company(): HasOne
     {
         return $this->hasOne(Company::class);
+    }
+
+    public function organizations(): BelongsToMany
+    {
+        return $this->belongsToMany(Company::class);
+    }
+
+    public function subscribers():HasMany
+    {
+        return $this->hasMany(Subscriber::class);
     }
 }

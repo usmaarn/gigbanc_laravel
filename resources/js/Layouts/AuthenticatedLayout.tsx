@@ -2,6 +2,7 @@ import {ReactNode, useState} from "react";
 import Navbar from "@/Components/dashboard/Navbar";
 import Sidebar from "@/Components/dashboard/Sidebar";
 import styles from "@/Components/dashboard/dashboard.module.css";
+import {Toaster} from "@/Components/ui/sonner";
 
 export default function AuthenticatedLayout({ children }: { children: ReactNode }) {
     const [open, setOpen] = useState(false);
@@ -15,6 +16,7 @@ export default function AuthenticatedLayout({ children }: { children: ReactNode 
                     {children}
                 </div>
             </section>
+            <Toaster closeButton richColors position="top-right" />
         </section>
     )
 }
