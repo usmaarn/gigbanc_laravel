@@ -19,4 +19,11 @@ class DashboardController extends Controller
             "ambassadors" => $this->getAmbassadors(),
         ]);
     }
+
+    public function complains()
+    {
+        return Inertia::render('Dashboard/Complains', [
+
+        ]);
+    }
 }

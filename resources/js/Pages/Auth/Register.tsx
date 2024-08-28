@@ -19,8 +19,6 @@ export default function Register() {
         companyEmail: "",
         companyPhone: "",
         companyUsername: "",
-        companyAddress: "",
-        companyDescription: "",
     })
 
     function handleSubmit(e: SubmitEvent) {
@@ -65,12 +63,6 @@ export default function Register() {
                                            type="tel" value={data?.companyPhone} onChange={handleChange}/>
                                 <FormInput error={errors?.companyUsername} label="Unique Business Name"
                                            name="companyUsername" value={data?.companyUsername} onChange={handleChange}/>
-                                <FormInput error={errors?.companyAddress} className="sm:col-span-2"
-                                           label="Business Address" name="companyAddress"
-                                           value={data?.companyAddress} onChange={handleChange}/>
-                                <FormTextarea error={errors?.companyDescription} className="sm:col-span-2"
-                                              label="Business Description" maxLength={255} name="companyDescription"
-                                              value={data?.companyDescription} onChange={handleChange}/>
                             </div>
                             <Separator className="my-5"/>
                             <h3 className="sm:col-span-2 font-semibold mb-3">Account Security</h3>

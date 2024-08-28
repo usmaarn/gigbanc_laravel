@@ -32,8 +32,6 @@ class CreateCompanyAccountRequest extends FormRequest
             "companyEmail" => ["required", "email", "max:50", "unique:companies,email"],
             "companyPhone" => ["required", "regex:/^0[789][01][0-9]{8}$/", "unique:companies,phone"],
             "companyUsername" => ["required", "min:5", "max:50", "alpha_dash", "unique:companies,username"],
-            "companyAddress" => ["required"],
-            "companyDescription" => ["required"],
         ];
     }
 }

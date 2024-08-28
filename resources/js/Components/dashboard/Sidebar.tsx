@@ -35,7 +35,7 @@ export default function Sidebar({open, onClose}: {
 
                 {auth?.isCompany &&
                     <SidebarMenuGroup label="My Company">
-                        <SidebarItem label="Complains" icon="material-symbols:leaderboard-outline" href={route('dashboard')}/>
+                        <SidebarItem label="Complains" icon="material-symbols:leaderboard-outline" href={route('dashboard.complains')}/>
                     </SidebarMenuGroup>
                 }
 

@@ -39,9 +39,7 @@ class RegisterController extends Controller
                 "name" => $request->companyName,
                 "email" => $request->companyEmail,
                 "phone" => $request->companyPhone,
-                "address" => $request->companyAddress,
                 "username" => $request->companyUsername,
-                "description" => $request->companyDescription,
                 "user_id" => $user->id,
             ]);
 
