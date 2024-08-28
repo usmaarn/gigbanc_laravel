@@ -19,10 +19,12 @@ export default function Dashboard({auth, companies}: PageProps<{companies: Compa
     const [code, setCode] = useState<string>("");
 
     useEffect(() => {
-        setCode(route("company.onboard", {
-            company:company,
-            user: auth?.user?.referral_code
-        }))
+        if (!auth?.isCompany){
+            setCode(route("company.onboard", {
+                company:company,
+                user: auth?.user?.referral_code
+            }))
+        }
     }, [company])
 
     if (auth.isCompany){
