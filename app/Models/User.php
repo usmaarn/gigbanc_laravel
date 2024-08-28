@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Enums\UserType;
 use App\Observers\V1\UserObserver;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,7 +18,7 @@ use Illuminate\Notifications\Notifiable;
 
 
 #[ObservedBy(UserObserver::class)]
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, FilamentUser
 {
     use HasFactory, Notifiable;
 
@@ -94,5 +96,19 @@ class User extends Authenticatable implements MustVerifyEmail
     public function subscribers():HasMany
     {
         return $this->hasMany(Subscriber::class);
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if (app()->environment('production')) {
+            return str_ends_with($this->email, "@luminousdigitalgency.com")
+                &&  $this->hasVerifiedEmail();
+        }
+        return true;
+    }
+
+    public function getNameAttribute(): string
+    {
+        return $this->first_name . " " .$this->last_name;
     }
 }

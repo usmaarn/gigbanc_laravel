@@ -5,13 +5,17 @@ import UserDropdown from "@/Components/UserDropdown";
 import {PageProps} from "@/types";
 
 
-export default function Navbar({name}: {name?: string}) {
+export default function Navbar({name, loginUrl, registerUrl}: {
+    name?: string
+    loginUrl: string,
+    registerUrl: string,
+}) {
     const {auth}: PageProps = usePage().props;
 
   return (
     <header className="h-[80px] border-b bg-white">
       <nav className="container px-3 h-full flex items-center justify-between">
-        <ApplicationLogo />
+        <ApplicationLogo name={name} />
 
         <div className="hidden md:flex items-center gap-8 font-semibold uppercase text-sm tracking-widest">
           <Link href="#">Home</Link>
@@ -21,10 +25,10 @@ export default function Navbar({name}: {name?: string}) {
 
         {!auth?.user ? (
           <div className="flex items-center gap-4">
-            <Link href={route("login")}>
+            <Link href={loginUrl}>
               <Button variant="outline">Login</Button>
             </Link>
-            <Link href={route("register")} className="hidden sm:inline">
+            <Link href={registerUrl} className="hidden sm:inline">
               <Button>Register</Button>
             </Link>
           </div>

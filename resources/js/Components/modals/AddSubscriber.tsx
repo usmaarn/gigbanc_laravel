@@ -21,7 +21,7 @@ import {toast} from "sonner";
 export default function AddSubscriber() {
     const closeRef: MutableRefObject<HTMLButtonElement | null> = useRef(null);
 
-    const {organizations, categories}: PageProps<{
+    const {organizations, categories, auth}: PageProps<{
         organizations: Company[];
         categories: Category[];
     }> = usePage().props;
@@ -34,7 +34,7 @@ export default function AddSubscriber() {
         type: "",
         category_id: "",
         company_id: "",
-        password: "",
+        user_id: auth?.user?.id
     });
 
     function handleSubmit(e: FormEvent){

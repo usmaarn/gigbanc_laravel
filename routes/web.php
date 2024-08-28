@@ -27,10 +27,15 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard");
+
     Route::prefix("/dashboard")->name("dashboard.")->group(function () {
         Route::get("/subscribers", [SubscribersController::class, 'index'])->name("subscribers");
+        Route::delete("/subscribers", [SubscribersController::class, 'destroy'])->name("subscribers");
         Route::post("/subscribers", [SubscribersController::class, 'store'])->name("subscribers")
         ->middleware("agent");
+
+        Route::get("/settings", [DashboardController::class, "settings"])->name("settings");
+        Route::get("/leaderboard", [DashboardController::class, "leaderboard"])->name("leaderboard");
     });
 });
 
@@ -42,3 +47,8 @@ Route::middleware("company")->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::get("/{company:username}", [CompanyController::class, "landing"])->name("company.landing");
+Route::get("/{company:username}/onboard/success", [SubscribersController::class, "onboardingSuccess"])
+    ->name("company.onboard-success");

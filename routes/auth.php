@@ -11,6 +11,9 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\V1\CompanyController;
 
+Route::get("/{company:username}/{user}/onboard", [\App\Http\Controllers\V1\SubscribersController::class, "onboardSubscriber"])->name("company.onboard");
+Route::post("/{company:username}/onboard", [\App\Http\Controllers\V1\SubscribersController::class, "store"])->name("company.onboard.store");
+
 Route::middleware('guest')->group(function () {
     Route::get('register', [\App\Http\Controllers\V1\Auth\RegisterController::class, 'index'])
                 ->name('register');

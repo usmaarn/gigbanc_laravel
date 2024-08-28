@@ -22,12 +22,12 @@ export default function UserDropdown() {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href="/dashboard" className="w-full">
+          <Link href={route('dashboard')} className="w-full">
             Dashboard
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Link href="/dashboard/settings" className="w-full">
+          <Link href={route('dashboard.settings')} className="w-full">
             Settings
           </Link>
         </DropdownMenuItem>

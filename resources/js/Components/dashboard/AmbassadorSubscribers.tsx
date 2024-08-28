@@ -38,14 +38,14 @@ export default function AmbassadorSubscribers(){
                                 <TableCell>{subscriber.type}</TableCell>
                                 <TableCell className="capitalize text-blue-500 font-medium">
                                     <Link className="hover:underline" href="#">
-                                        {subscriber?.company.name}
+                                        {subscriber?.company?.name}
                                     </Link>
                                 </TableCell>
                                 <TableCell>
-                                    <Badge variant="secondary" className={subscriber.status == "onboarded"
+                                    <Badge variant="secondary" className={subscriber.status == "10"
                                         ? "text-green-800 bg-green-100" : "text-red-800 bg-red-100"
                                     }>
-                                        {subscriber.status}
+                                        {subscriber.status == "5" ? "unverified" : "verified"}
                                     </Badge>
                                 </TableCell>
                                 <TableCell>

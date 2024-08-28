@@ -21,27 +21,28 @@ export default function Sidebar({open, onClose}: {
     return (
         <Card className={`${styles.sidebar} ${open && styles.active}`}>
             <div className="flex-grow flex flex-col px-3 py-5 overflow-y-auto gap-5">
-
                 <SidebarMenuGroup label="Panel">
                     <SidebarItem label="Dashboard" icon="material-symbols:leaderboard-outline" href={route("dashboard")}/>
                     {auth.isCompany && <SidebarItem label="Ambassadors" icon="material-symbols:leaderboard-outline"
                                   href={route("company.ambassadors")}/>}
                     <SidebarItem label="Subscribers" icon="material-symbols:leaderboard-outline"
                                   href={route("dashboard.subscribers")}/>
-                    {!auth.isCompany &&
-                        <SidebarItem label="Organizations" icon="material-symbols:leaderboard-outline"
-                                  href={route("dashboard")}/>}
+                    <SidebarItem label="Leaderboard" icon="material-symbols:leaderboard-outline"
+                                 href={route("dashboard.leaderboard")}/>
+                    {/*{!auth.isCompany &&*/}
+                    {/*    <SidebarItem label="Organizations" icon="material-symbols:leaderboard-outline"*/}
+                    {/*              href={route("dashboard")}/>}*/}
                 </SidebarMenuGroup>
 
-                {auth?.isCompany &&
-                    <SidebarMenuGroup label="My Company">
-                        <SidebarItem label="Complaints" icon="material-symbols:leaderboard-outline" href={route('dashboard.complains')}/>
-                    </SidebarMenuGroup>
-                }
+                {/*{auth?.isCompany &&*/}
+                {/*    <SidebarMenuGroup label="My Company">*/}
+                {/*        <SidebarItem label="Users' Complaints" icon="material-symbols:leaderboard-outline" href={route('dashboard.complains')}/>*/}
+                {/*    </SidebarMenuGroup>*/}
+                {/*}*/}
 
                 <SidebarMenuGroup label="Settings" className="mt-auto">
-                    <SidebarItem label="Account Settings" icon="codicon:account" href={route('dashboard')}/>
-                    {auth.isCompany && <SidebarItem label="Company Settings" icon="codicon:account" href={route('dashboard')}/>}
+                    <SidebarItem label="Account Settings" icon="codicon:account" href={route('dashboard.settings')}/>
+                    {/*{auth.isCompany && <SidebarItem label="Company Settings" icon="codicon:account" href={route('dashboard')}/>}*/}
                     <form onSubmit={handleSubmit}>
                         <button className={`${styles.sidebarItem} ${styles.logout}`}>
                             <Icon icon="ant-design:logout-outlined" className="mr-2 text-lg"/>

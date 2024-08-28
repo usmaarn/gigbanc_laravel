@@ -12,7 +12,7 @@ class SubscriberRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user() && $this->user()->isAmbassador();
+        return true;
     }
 
     /**
@@ -29,6 +29,7 @@ class SubscriberRequest extends FormRequest
             "type" => ["required", "string", "in:individual,organization"],
             "category_id" => ["required_if:type,organization", "integer", "exists:categories,id"],
             "company_id" => ["required", "numeric", "exists:companies,id"],
+            "user_id" => ["required", "numeric", "exists:users,id"],
         ];
     }
 }

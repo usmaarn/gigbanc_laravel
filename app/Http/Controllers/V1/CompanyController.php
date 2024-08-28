@@ -74,4 +74,12 @@ class CompanyController extends Controller
            return redirect(route("dashboard"));
        });
     }
+
+    public function landing(Request $request, Company $company)
+    {
+        return Inertia::render('Welcome', [
+           "company" => $company,
+        ]);
+    }
+
 }

@@ -9,6 +9,8 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import AddSubscriber from "@/Components/modals/AddSubscriber";
 import {Badge} from "@/Components/ui/badge";
 import {PageProps} from "@/types";
+import EditSubscriber from "@/Components/modals/EditSubscriber";
+import DeleteSubscriber from "@/Components/modals/DeleteSubscriber";
 
 
 export default function Ambassadors({subscribers, auth}: PageProps<{subscribers: Subscriber[]}>) {
@@ -54,14 +56,12 @@ export default function Ambassadors({subscribers, auth}: PageProps<{subscribers:
                                     <TableCell>{subscriber?.organization.name}</TableCell>
                                     <TableCell>
                                         <Badge variant="destructive" className="whitespace-nowrap">
-                                            {subscriber.status == "5" ? "NOT ONBOARDED" : "ONBOARDED"}
+                                            {subscriber.status == "5" ? "Not verified" : "Verified"}
                                         </Badge>
                                     </TableCell>
                                     <TableCell className="space-x-3">
-                                        <span>Edit</span>
-                                        <span>Delete</span>
-                                        {/*<EditAmbassador subscriber={subscriber} />*/}
-                                        {/*<DeleteAmbassador id={subscriber.id} />*/}
+                                        <EditSubscriber subscriber={subscriber} />
+                                        <DeleteSubscriber id={subscriber.id} />
                                     </TableCell>
                                 </TableRow>
                             ))}

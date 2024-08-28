@@ -29,12 +29,12 @@ export default function Register({company}: {company: Company}) {
     }
 
     return (
-        <Guest>
+        <Guest name={company.name}>
             <section className="w-full max-w-[600px] mx-auto">
                 <form onSubmit={handleSubmit}>
                     <Card>
                         <CardHeader>
-                            <CardTitle>Individual Account</CardTitle>
+                            <CardTitle>Ambassador Account</CardTitle>
                         </CardHeader>
                         <CardContent className="grid md:grid-cols-2 gap-5">
                             <FormInput error={errors?.firstName} label="First Name" value={data?.firstName} name="firstName" onChange={handleChange}/>

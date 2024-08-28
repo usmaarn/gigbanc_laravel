@@ -6,6 +6,7 @@ import {Badge} from "@/Components/ui/badge";
 import {PageProps} from "@/types";
 import {FormInput} from "@/Components/form";
 import AddSubscriber from "@/Components/modals/AddSubscriber";
+import EditSubscriber from "@/Components/modals/EditSubscriber";
 
 
 export default function Subscribers(){
@@ -28,7 +29,6 @@ export default function Subscribers(){
                             <TableHead>Category</TableHead>
                             <TableHead>Organization</TableHead>
                             <TableHead>Status</TableHead>
-                            <TableHead>Actions</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -45,12 +45,6 @@ export default function Subscribers(){
                                     <Badge variant="destructive" className="whitespace-nowrap">
                                         {subscriber.status == "5" ? "NOT ONBOARDED" : "ONBOARDED"}
                                     </Badge>
-                                </TableCell>
-                                <TableCell className="space-x-3">
-                                    <span>Edit</span>
-                                    <span>Delete</span>
-                                    {/*<EditAmbassador subscriber={subscriber} />*/}
-                                    {/*<DeleteAmbassador id={subscriber.id} />*/}
                                 </TableCell>
                             </TableRow>
                         ))}

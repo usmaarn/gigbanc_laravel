@@ -2,7 +2,11 @@ import {Link, usePage} from "@inertiajs/react";
 import {PageProps} from "@/types";
 import {Button} from "@/Components/ui/button";
 
-export default function HeroSection({name}: {name?: string}) {
+export default function HeroSection({name, loginUrl, registerUrl}: {
+    name?: string
+    loginUrl: string,
+    registerUrl: string,
+}) {
   const {auth}: PageProps = usePage().props;
 
   return (
@@ -11,7 +15,7 @@ export default function HeroSection({name}: {name?: string}) {
             flex-col items-center md:justify-center gap-10 h-[calc(100vh_-_80px)]"
     >
       <h1 className="text-4xl sm:text-5xl md:text-6xl font-black capitalize text-neutral-600">
-        Growthacy <br /> Advocacy System
+          {name ?? "Growthacy"} <br /> Advocacy System
       </h1>
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -23,12 +27,12 @@ export default function HeroSection({name}: {name?: string}) {
           </Link>
         ) : (
           <>
-            <Link href={route("login")}>
+            <Link href={loginUrl}>
               <Button size="lg" variant="outline" className="font-bold">
                 Get Started
               </Button>
             </Link>
-            <Link href={route("register")}>
+            <Link href={registerUrl}>
               <Button size="lg" className="font-bold">
                 Join The Community
               </Button>

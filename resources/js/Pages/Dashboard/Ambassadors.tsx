@@ -54,7 +54,7 @@ export default function Ambassadors({ambassadors}: {ambassadors: Ambassador[]}) 
                                     <TableCell>
                                         N{(ambassador?.subscribers?.verified * 1500).toLocaleString()}
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell className="space-x-3">
                                         <EditAmbassador ambassador={ambassador} />
                                         <DeleteAmbassador id={ambassador.id} />
                                     </TableCell>

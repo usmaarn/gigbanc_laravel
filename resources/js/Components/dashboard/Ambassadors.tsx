@@ -31,7 +31,6 @@ export default function Ambassadors() {
                             <TableHead>Completed</TableHead>
                             <TableHead>UnCompleted</TableHead>
                             <TableHead>Earnings</TableHead>
-                            <TableHead>Action</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -56,12 +55,8 @@ export default function Ambassadors() {
                                 <TableCell>
                                     N
                                     {(
-                                        ambassador?.subscribers?.verified * 1500
+                                        (ambassador?.subscribers?.verified ?? 0) * 1500
                                     ).toLocaleString()}
-                                </TableCell>
-                                <TableCell>
-                                    {/*<EditAmbassador ambassador={ambassador as User} />*/}
-                                    {/*<DeleteAmbassador id={ambassador.id} />*/}
                                 </TableCell>
                             </TableRow>
                         ))}
