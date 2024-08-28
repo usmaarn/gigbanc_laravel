@@ -9,18 +9,21 @@ import AmbassadorSubscribers from "@/Components/dashboard/AmbassadorSubscribers"
 import {Card, CardContent} from "@/Components/ui/card";
 import {Company} from "@/types/data";
 import {useEffect, useState} from "react";
+import {FormInput, FormSelect} from "@/Components/form";
+import {SelectItem} from "@/Components/ui/select";
 
 
 export default function Dashboard({auth, companies}: PageProps<{companies: Company[]}>) {
 
-    const [company_id, setCode] = useState<string>("");
+    const [company, setCompany] = useState<string>("");
+    const [code, setCode] = useState<string>("");
 
     useEffect(() => {
         setCode(route("company.onboard", {
-            company: companies[0]?.username,
+            company:company,
             user: auth?.user?.referral_code
         }))
-    }, [])
+    }, [company])
 
     if (auth.isCompany){
         return (
@@ -43,9 +46,13 @@ export default function Dashboard({auth, companies}: PageProps<{companies: Compa
             <section className="space-y-5">
                 <AmbassadorStats />
 
-                <Card className="py-3 px-10">
-
-                    <a href={code} target="_blank">{code}</a>
+                <Card className="py-3 px-10 grid gap-5 md:grid-cols-2">
+                    <FormSelect label="Organization" onValueChange={(e) => setCompany(e)}>
+                        {companies.map(c => (
+                            <SelectItem value={c.username?.toString()}>{c.name}</SelectItem>
+                        ))}
+                    </FormSelect>
+                    <FormInput label="Referral Link" readOnly value={code} />
                 </Card>
 
 
