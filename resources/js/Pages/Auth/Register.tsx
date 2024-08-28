@@ -61,7 +61,7 @@ export default function Register() {
                                            value={data?.companyEmail} onChange={handleChange}/>
                                 <FormInput error={errors?.companyPhone} label="Phone Number" name="companyPhone"
                                            type="tel" value={data?.companyPhone} onChange={handleChange}/>
-                                <FormInput error={errors?.companyUsername} label="Unique Business Name"
+                                <FormInput error={errors?.companyUsername} label="Username"
                                            name="companyUsername" value={data?.companyUsername} onChange={handleChange}/>
                             </div>
                             <Separator className="my-5"/>
