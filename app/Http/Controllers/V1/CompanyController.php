@@ -82,4 +82,11 @@ class CompanyController extends Controller
         ]);
     }
 
+    public function settings(Request $request)
+    {
+        return Inertia::render('Company/Settings', [
+           "company" => $request->user()->company,
+        ]);
+    }
+
 }

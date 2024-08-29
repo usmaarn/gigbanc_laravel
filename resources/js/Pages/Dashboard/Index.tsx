@@ -6,26 +6,21 @@ import Ambassadors from "@/Components/dashboard/Ambassadors";
 import {PageProps} from "@/types";
 import AmbassadorStats from "@/Components/dashboard/AmbassadorStats";
 import AmbassadorSubscribers from "@/Components/dashboard/AmbassadorSubscribers";
-import {Card, CardContent} from "@/Components/ui/card";
+import {Card, CardContent, CardHeader, CardTitle} from "@/Components/ui/card";
 import {Company} from "@/types/data";
 import {useEffect, useState} from "react";
 import {FormInput, FormSelect} from "@/Components/form";
 import {SelectItem} from "@/Components/ui/select";
+import {Snippet} from "@nextui-org/react";
 
 
-export default function Dashboard({auth, companies}: PageProps<{companies: Company[]}>) {
+export default function Dashboard({auth, organizations}: PageProps<{organizations: Company[]}>) {
+    const organization = organizations[0];
 
-    const [company, setCompany] = useState<string>("");
-    const [code, setCode] = useState<string>("");
-
-    useEffect(() => {
-        if (!auth?.isCompany){
-            setCode(route("company.onboard", {
-                company:company,
-                user: auth?.user?.referral_code
-            }))
-        }
-    }, [company])
+    const referralLink = route("company.onboard", {
+        user: auth?.user?.referral_code,
+        company: organization?.username
+    });
 
     if (auth.isCompany){
         return (
@@ -46,23 +41,22 @@ export default function Dashboard({auth, companies}: PageProps<{companies: Compa
     return (
         <AuthenticatedLayout>
             <section className="space-y-5">
-                <AmbassadorStats />
+                <AmbassadorStats/>
 
-                <Card className="py-3 px-10 grid gap-5 md:grid-cols-2">
-                    <FormSelect label="Organization" onValueChange={(e) => setCompany(e)}>
-                        {companies.map(c => (
-                            <SelectItem value={c.username?.toString()}>{c.name}</SelectItem>
-                        ))}
-                    </FormSelect>
-                    <FormInput label="Referral Link" readOnly value={code} />
-                </Card>
+                <div className="p-3 bg-white rounded-lg shadow flex items-start flex-col gap-1">
+                    <h3 className="font-semibold">Refferal Code</h3>
+                    <div className="flex gap-1">
+                        <Snippet className="sm:hidden" hideSymbol content={referralLink}  />
+                        <Snippet hideSymbol>{referralLink}</Snippet>
+                    </div>
+                </div>
 
 
                 <section className="grid md:grid-cols-2 gap-2">
                     <BarChartComponent title="Subscriptions"/>
                     <BarChartComponent title="Onboarded"/>
                 </section>
-                <AmbassadorSubscribers />
+                <AmbassadorSubscribers/>
             </section>
         </AuthenticatedLayout>
     )

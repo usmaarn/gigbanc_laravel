@@ -29,12 +29,12 @@ export default function HeroSection({name, loginUrl, registerUrl}: {
           <>
             <Link href={loginUrl}>
               <Button size="lg" variant="outline" className="font-bold">
-                Get Started
+                Login
               </Button>
             </Link>
             <Link href={registerUrl}>
               <Button size="lg" className="font-bold">
-                Join The Community
+                Register
               </Button>
             </Link>
           </>

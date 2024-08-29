@@ -42,7 +42,7 @@ export default function Sidebar({open, onClose}: {
 
                 <SidebarMenuGroup label="Settings" className="mt-auto">
                     <SidebarItem label="Account Settings" icon="codicon:account" href={route('dashboard.settings')}/>
-                    {/*{auth.isCompany && <SidebarItem label="Company Settings" icon="codicon:account" href={route('dashboard')}/>}*/}
+                    {auth.isCompany && <SidebarItem label="Company Link" icon="codicon:account" href={route('company.settings')}/>}
                     <form onSubmit={handleSubmit}>
                         <button className={`${styles.sidebarItem} ${styles.logout}`}>
                             <Icon icon="ant-design:logout-outlined" className="mr-2 text-lg"/>
