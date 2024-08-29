@@ -15,9 +15,11 @@ use Inertia\Inertia;
 
 class AmbassadorRegistrationController extends Controller
 {
-    public function page()
+    public function page(Company $company)
     {
-        return Inertia::render("Auth/Register/Ambassador");
+        return Inertia::render("Auth/Register/Ambassador", [
+            "company" => $company,
+        ]);
     }
 
     public function register(CreateAmbassadorAccountRequest $request, Company  $company)

@@ -39,7 +39,7 @@ class SubscribersController extends Controller
                "email" => $request->email,
                "phone" => $request->phone,
                "type" => $request->type,
-               "status" => SubscriptionStatus::NOT_ONBOARDED->value,
+               "status" => SubscriptionStatus::PROCESSING->value,
                "company_id" => $request->company_id,
                "category_id" => $request->category_id,
                "user_id" => $request->user_id,

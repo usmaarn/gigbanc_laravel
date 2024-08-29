@@ -11,7 +11,7 @@ class CreateAmbassadorAccountRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class CreateAmbassadorAccountRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "firstName" => ["required", "alpha", "min:3", "max:50"],
+            "lastName" => ["required", "alpha", "min:3", "max:50"],
+            "email" => ["required", "email", "max:50", "unique:users,email"],
+            "phone" => ["required", "regex:/^0[789][01][0-9]{8}$/", "unique:users,phone"],
+            "password" => ["required", "min:8", "max:50", "confirmed"],
         ];
     }
 }

@@ -17,9 +17,9 @@ use Inertia\Inertia;
 class RegistrationController extends Controller
 {
     use DataGenerator;
-    public function registrationPage()
+    public function page()
     {
-        return Inertia::render('Company/Auth/Company');
+        return Inertia::render('Auth/Register/Company');
     }
 
     public function register(CreateCompanyAccountRequest $request)
@@ -42,7 +42,7 @@ class RegistrationController extends Controller
         $company->name = $request->companyName;
         $company->email = $request->companyEmail;
         $company->phone = $request->companyPhoneNumber;
-        $company->username = $request->companyUserName;
+        $company->username = $request->companyUsername;
 
         DB::transaction(function () use ($company, $user) {
             $user->save();

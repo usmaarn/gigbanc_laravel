@@ -20,7 +20,7 @@ export default function Register({company}: {company: Company}) {
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
-        post(route("regi", company.username))
+        post(route("ambassador.register", company.username))
     }
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -45,7 +45,7 @@ export default function Register({company}: {company: Company}) {
                             <FormInput type="password" error={errors?.password} label="Password"  value={data?.password_confirmation} name="password_confirmation" onChange={handleChange}/>
                         </CardContent>
                         <CardFooter className="space-x-5">
-                            <FormButton type="submit" size="default" className="w-auto">Register</FormButton>
+                            <FormButton loading={processing} type="submit" size="default" className="w-auto">Register</FormButton>
                             <Link href={route("login")}>
                                 <Button variant="outline">Sign In</Button>
                             </Link>

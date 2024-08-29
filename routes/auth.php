@@ -19,7 +19,7 @@ Route::post("/{company:username}/onboard", [\App\Http\Controllers\V1\Subscribers
 Route::middleware('guest')->group(function () {
 
     // Company Organization
-    Route::get('register', [RegistrationController::class, 'registrationPage'])->name('register');
+    Route::get('register', [RegistrationController::class, 'page'])->name('register');
     Route::post('register', [RegistrationController::class, 'register'])->name('register');
 
     //Company Ambassador

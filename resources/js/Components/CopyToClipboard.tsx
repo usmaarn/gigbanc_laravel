@@ -23,10 +23,10 @@ export default function CopyToClipboard({text, title, ...props}: {
     return(
        <TooltipProvider>
            <Tooltip>
-               <TooltipTrigger>
+               <TooltipTrigger asChild>
                    <Button
                        disabled={copied || props.disabled}
-                       className="cursor-not-allowed"
+                       className="disabled:cursor-not-allowed disabled:pointer-events-none"
                        onClick={copy}
                        size="icon"
                        variant="outline"

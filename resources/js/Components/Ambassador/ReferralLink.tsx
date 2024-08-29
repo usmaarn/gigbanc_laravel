@@ -8,9 +8,9 @@ import {usePage} from "@inertiajs/react";
 
 export default function ReferralLink(){
 
-    const {auth, organizations}:PageProps<{organizations: { data: Company[] }}> = usePage().props;
-    console.log(auth)
-    const companies = organizations;
+    const {auth, organizations}:PageProps<{organizations: Company[] }> = usePage().props;
+
+    const companies = organizations ?? [];
     const disable = companies.length <= 0;
 
     const [company, setCompany] = useState<string>(companies[0]?.username ?? "");

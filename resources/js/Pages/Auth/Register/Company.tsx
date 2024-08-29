@@ -1,5 +1,5 @@
 import {Link, useForm} from "@inertiajs/react";
-import {FormButton, FormInput, FormTextarea} from "@/Components/form";
+import {FormButton, FormInput} from "@/Components/form";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/Components/ui/card";
 import {Separator} from "@/Components/ui/separator";
 import {Button} from "@/Components/ui/button";
@@ -12,12 +12,12 @@ export default function Company() {
         firstName: "",
         lastName: "",
         email: "",
-        phone: "",
+        phoneNumber: "",
         password: "",
         password_confirmation: "",
         companyName: "",
         companyEmail: "",
-        companyPhone: "",
+        companyPhoneNumber: "",
         companyUsername: "",
     })
 
@@ -48,7 +48,7 @@ export default function Company() {
                                 <FormInput error={errors?.firstName} label="First Name" value={data?.firstName} name="firstName" onChange={handleChange}/>
                                 <FormInput error={errors?.lastName} label="Last Name" name="lastName" value={data?.lastName} onChange={handleChange}/>
                                 <FormInput error={errors?.email} label="Email Address" name="email" type="email" value={data?.email} onChange={handleChange}/>
-                                <FormInput error={errors?.phone} label="Phone Number" name="phone" type="tel" value={data?.phone} onChange={handleChange}/>
+                                <FormInput error={errors?.phoneNumber} label="Phone Number" name="phoneNumber" type="tel" value={data?.phoneNumber} onChange={handleChange}/>
                             </div>
 
                             <Separator className="my-5"/>
@@ -59,8 +59,8 @@ export default function Company() {
                                            value={data?.companyName} onChange={handleChange}/>
                                 <FormInput error={errors?.companyEmail} label="Business Email" name="companyEmail"
                                            value={data?.companyEmail} onChange={handleChange}/>
-                                <FormInput error={errors?.companyPhone} label="Phone Number" name="companyPhone"
-                                           type="tel" value={data?.companyPhone} onChange={handleChange}/>
+                                <FormInput error={errors?.companyPhoneNumber} label="Phone Number" name="companyPhoneNumber"
+                                           type="tel" value={data?.companyPhoneNumber} onChange={handleChange}/>
                                 <FormInput error={errors?.companyUsername} label="Username"
                                            name="companyUsername" value={data?.companyUsername} onChange={handleChange}/>
                             </div>
