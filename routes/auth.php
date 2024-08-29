@@ -8,10 +8,9 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\V1\CompanyController;
-use App\Http\Controllers\Web\V1\Company\Auth\RegistrationController;
 use App\Http\Controllers\V1\Auth\AmbassadorRegistrationController;
+use App\Http\Controllers\Web\V1\Company\Auth\RegistrationController;
+use Illuminate\Support\Facades\Route;
 
 
 Route::get("/{company:username}/{user}/onboard", [\App\Http\Controllers\V1\SubscribersController::class, "onboardSubscriber"])->name("company.onboard");
@@ -26,10 +25,10 @@ Route::middleware('guest')->group(function () {
     //Company Ambassador
     Route::get("/{company:username}/register", [AmbassadorRegistrationController::class, "page"])
         ->name("ambassador.register");
-    Route::post("/{company:username}/register", [AmbassadorRegistrationController::class, "register"])->name("company.register");
+    Route::post("/{company:username}/register", [AmbassadorRegistrationController::class, "register"])
+        ->name("ambassador.register");
 
-    Route::post('register', [\App\Http\Controllers\V1\Auth\RegisterController::class, 'store']);
-
+    //Login
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
 

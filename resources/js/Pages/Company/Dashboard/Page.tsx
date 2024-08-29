@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import Stats from "@/Components/dashboard/Stats";
+import Stats from "@/Components/Company/Stats";
 import {BarChartComponent} from "@/Components/charts/BarChartComponent";
 import SubscribersTable from "@/Components/Tables/SubscribersTable";
 import TopAmbassador from "@/Components/Tables/TopAmbassador";

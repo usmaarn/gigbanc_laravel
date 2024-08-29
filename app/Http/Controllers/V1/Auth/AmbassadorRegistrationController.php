@@ -7,17 +7,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\V1\Auth\CreateAmbassadorAccountRequest;
 use App\Models\Company;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class AmbassadorRegistrationController extends Controller
 {
     public function page()
     {
-
+        return Inertia::render("Auth/Register/Ambassador");
     }
 
     public function register(CreateAmbassadorAccountRequest $request, Company  $company)

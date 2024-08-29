@@ -3,7 +3,7 @@ import {Card, CardContent} from "@/Components/ui/card";
 import {usePage} from "@inertiajs/react";
 import {PageProps} from "@/types";
 
-export default  function AmbassadorStats(){
+export default  function Stats(){
     const {subscribersCount, earnings, walletBalance}: PageProps<{
         subscribersCount: number;
         walletBalance: number;

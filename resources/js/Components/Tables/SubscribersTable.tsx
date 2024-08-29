@@ -5,17 +5,20 @@ import {DateTime} from "luxon";
 import {Subscriber} from "@/types";
 import {Badge} from "@/Components/ui/badge";
 
-export default function SubscribersTable({subscribers, title}: {
+export default function SubscribersTable({subscribers, title, ...props}: {
     subscribers: Subscriber[];
     title?: string
+    withPagination?: boolean;
+    searchable?: boolean;
 }) {
 
     const data = useMemo(() => subscribers ?? [], []);
 
     const columns: ColumnDef<Subscriber>[] = [
         {
-            header: "ID",
+            header: "Index",
             accessorKey: "id",
+            cell: info => info.row.index + 1
         },
         {
             header: "Name",
@@ -59,5 +62,6 @@ export default function SubscribersTable({subscribers, title}: {
         data={data}
         columns={columns}
         title={title}
+        {...props}
     /> ;
 }

@@ -4,7 +4,7 @@ import Stats from "@/Components/dashboard/Stats";
 import Subscribers from "@/Components/dashboard/Subscribers";
 import Ambassadors from "@/Components/dashboard/Ambassadors";
 import {PageProps} from "@/types";
-import AmbassadorStats from "@/Components/dashboard/AmbassadorStats";
+import AmbassadorStats from "@/Components/dashboard/Stats";
 import AmbassadorSubscribers from "@/Components/dashboard/AmbassadorSubscribers";
 import {Company} from "@/types/data";
 import {useState} from "react";

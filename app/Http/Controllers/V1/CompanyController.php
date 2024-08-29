@@ -57,7 +57,7 @@ class CompanyController extends Controller
 
     public function storeAmbassador()
     {
-        
+
     }
 
     public function landing(Request $request, Company $company)

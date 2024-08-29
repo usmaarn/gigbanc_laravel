@@ -34,6 +34,7 @@ export default function DataTable<Type>({data, columns, ...props}: {
 
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+    const [value, setValue] = useState<string>("");
 
     const table = useReactTable({
         data,
@@ -57,9 +58,12 @@ export default function DataTable<Type>({data, columns, ...props}: {
                 {props.searchable && <div className="flex-grow flex items-center justify-end">
                     <Input
                         className="max-w-sm"
-                        placeholder="Search Emails..."
-                        value={(table.getColumn("email")?.getFilterValue() as string)}
-                        onChange={e => table.getColumn("email")?.setFilterValue(e.target.value)}
+                        placeholder="Search..."
+                        value={value}
+                        onChange={e => {
+                            setValue(e.target.value)
+                            table.getColumn("name")?.setFilterValue(e.target.value)
+                        }}
                     />
                 </div>}
             </CardHeader>
