@@ -1,71 +1,69 @@
 import {Ambassador} from "@/types/data";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/Components/ui/card";
-import {FormInput} from "@/Components/form";
-import AddAmbassador from "@/Components/modals/AddAmbassador";
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/Components/ui/table";
-import EditAmbassador from "@/Components/modals/EditAmbassador";
-import DeleteAmbassador from "@/Components/modals/DeleteAmbassador";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import DataTable from "@/Components/DataTable";
+import {useMemo} from "react";
+import {ColumnDef} from "@tanstack/react-table";
+import {Button} from "@/Components/ui/button";
+import {ArrowDown} from "lucide-react";
+import {DateTime} from "luxon";
 
 
 export default function Ambassadors({ambassadors}: {ambassadors: Ambassador[]}) {
     ambassadors = ambassadors ?? [];
 
+    const memoData = useMemo(() => ambassadors, []);
+
+    const columns: ColumnDef<Ambassador>[] = [
+        {
+            header: "ID",
+            accessorKey: "id",
+            footer: "ID"
+        },
+        {
+            header: "Name",
+            accessorFn: row => `${row.first_name} ${row.last_name}`,
+            footer: "Name"
+        },
+        {
+            header: "First Name",
+            accessorKey: "first_name",
+            footer: "First Name"
+        },
+        {
+            header: "Last Name",
+            accessorKey: "last_name",
+            footer: "Last Name"
+        },
+        {
+            header: ({column}) => (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Email <ArrowDown className="ml-2 size-4" />
+                </Button>
+            ),
+            accessorKey: "email",
+            footer: "Email"
+        },
+        {
+            header: ({column}) => (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Date <ArrowDown className="ml-2 size-4" />
+                </Button>
+            ),
+            accessorKey: "created_at",
+            footer: "Date Joined",
+            cell: info => DateTime.fromISO(info.getValue() as string).toLocaleString(DateTime.DATE_MED)
+        }
+    ]
+
     return (
         <AuthenticatedLayout>
-            <DataTable data={ambassadors} />
-            {/*<Card>*/}
-            {/*    <CardHeader className="border-b">*/}
-            {/*        <div className="flex items-center justify-between">*/}
-            {/*            <div className="">*/}
-            {/*                <CardTitle>Ambassadors</CardTitle>*/}
-            {/*                <CardDescription>A list of all your ambassadors.</CardDescription>*/}
-            {/*            </div>*/}
-            {/*            <div className="flex items-center gap-3">*/}
-            {/*                <FormInput placeholder="Search record"/>*/}
-            {/*                <AddAmbassador />*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    </CardHeader>*/}
-            {/*    <CardContent>*/}
-            {/*        <Table>*/}
-            {/*            <TableHeader>*/}
-            {/*                <TableRow>*/}
-            {/*                    <TableHead>Rank</TableHead>*/}
-            {/*                    <TableHead>Name</TableHead>*/}
-            {/*                    <TableHead>Email</TableHead>*/}
-            {/*                    <TableHead>Onboarded</TableHead>*/}
-            {/*                    <TableHead>Completed</TableHead>*/}
-            {/*                    <TableHead>UnCompleted</TableHead>*/}
-            {/*                    <TableHead>Earnings</TableHead>*/}
-            {/*                    <TableHead>Action</TableHead>*/}
-            {/*                </TableRow>*/}
-            {/*            </TableHeader>*/}
-            {/*            <TableBody>*/}
-            {/*                {ambassadors.map((ambassador: Ambassador, index) => (*/}
-            {/*                    <TableRow key={ambassador?.id}>*/}
-            {/*                        <TableCell className="font-medium">{index + 1}</TableCell>*/}
-            {/*                        <TableCell className="whitespace-nowrap">*/}
-            {/*                            {ambassador.first_name} {ambassador.last_name}*/}
-            {/*                        </TableCell>*/}
-            {/*                        <TableCell>{ambassador.email}</TableCell>*/}
-            {/*                        <TableCell>{ambassador?.subscribers?.count.toLocaleString() ?? 0}</TableCell>*/}
-            {/*                        <TableCell>{ambassador?.subscribers?.verified.toLocaleString() ?? 0}</TableCell>*/}
-            {/*                        <TableCell>{ambassador?.subscribers?.unverified.toLocaleString() ?? 0}</TableCell>*/}
-            {/*                        <TableCell>*/}
-            {/*                            N{(ambassador?.subscribers?.verified * 1500).toLocaleString()}*/}
-            {/*                        </TableCell>*/}
-            {/*                        <TableCell className="space-x-3">*/}
-            {/*                            <EditAmbassador ambassador={ambassador} />*/}
-            {/*                            <DeleteAmbassador id={ambassador.id} />*/}
-            {/*                        </TableCell>*/}
-            {/*                    </TableRow>*/}
-            {/*                ))}*/}
-            {/*            </TableBody>*/}
-            {/*        </Table>*/}
-            {/*    </CardContent>*/}
-            {/*</Card>*/}
+            <DataTable data={ambassadors} columns={columns} />
         </AuthenticatedLayout>
     )
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterAmbassadorRequest;
 use App\Http\Requests\V1\Company\NewAmbassadorRequest;
 use App\Models\Company;
+use App\Models\User;
 use App\Traits\Ambassadors;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class CompanyController extends Controller
     public function ambassadors(Request $request)
     {
         return Inertia::render('Dashboard/Ambassadors', [
-            "ambassadors" => $this->getAmbassadors(),
+            "ambassadors" => User::all(),
         ]);
     }
 

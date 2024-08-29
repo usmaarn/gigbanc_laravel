@@ -29,7 +29,7 @@ return new class extends Migration
             $table->foreignId("company_id")->constrained("companies")->cascadeOnDelete();
             $table->foreignId("user_id")->constrained("users")->cascadeOnDelete();
             $table->primary(["company_id", "user_id"]);
-            $table->string("status")->default("approved");
+            $table->string("status")->default(\App\Enums\AmbassadorStatus::PENDING->value);
             $table->timestamps();
         });
     }

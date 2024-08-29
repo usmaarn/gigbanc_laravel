@@ -8,6 +8,7 @@ export type User = {
     email: string;
     phone?: string;
     roles?: string[];
+    created_at?: string;
     subscribers: {
         count: number;
         verified: number;
