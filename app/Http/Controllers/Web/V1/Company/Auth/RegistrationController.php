@@ -19,7 +19,7 @@ class RegistrationController extends Controller
     use DataGenerator;
     public function registrationPage()
     {
-        return Inertia::render('Company/Auth/Register');
+        return Inertia::render('Company/Auth/Company');
     }
 
     public function register(CreateCompanyAccountRequest $request)

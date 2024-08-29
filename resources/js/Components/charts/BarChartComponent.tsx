@@ -2,6 +2,9 @@ import {ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent} from "@/
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/Components/ui/card";
 import {Bar, BarChart, CartesianGrid, XAxis} from "recharts";
 import {TrendingUp} from "lucide-react";
+import {Subscriber} from "@/types/data";
+import {usePage} from "@inertiajs/react";
+import {PageProps} from "@/types";
 
 const chartData = [
     { month: "January", desktop: 186 },
@@ -22,6 +25,9 @@ const chartConfig = {
 export function BarChartComponent({title}: {
     title: string;
 }) {
+
+    const {subscribers}: PageProps<{subscribers: Subscriber[]}> = usePage().props;
+
     return (
         <Card>
             <CardHeader>
@@ -32,13 +38,13 @@ export function BarChartComponent({title}: {
                 <ChartContainer config={chartConfig}>
                     <BarChart accessibilityLayer data={chartData}>
                         <CartesianGrid vertical={false} />
-                        <XAxis
-                            dataKey="month"
-                            tickLine={false}
-                            tickMargin={10}
-                            axisLine={false}
-                            tickFormatter={(value) => value.slice(0, 3)}
-                        />
+                        {/*<XAxis*/}
+                        {/*    dataKey="month"*/}
+                        {/*    tickLine={false}*/}
+                        {/*    tickMargin={1}*/}
+                        {/*    axisLine={false}*/}
+                        {/*    tickFormatter={(value) => value.slice(0, 3)}*/}
+                        {/*/>*/}
                         <ChartTooltip
                             cursor={false}
                             content={<ChartTooltipContent hideLabel />}
@@ -47,14 +53,6 @@ export function BarChartComponent({title}: {
                     </BarChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter className="flex-col items-start gap-2 text-sm">
-                <div className="flex gap-2 font-medium leading-none">
-                    Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-                </div>
-                <div className="leading-none text-muted-foreground">
-                    Showing total visitors for the last 6 months
-                </div>
-            </CardFooter>
         </Card>
     )
 }

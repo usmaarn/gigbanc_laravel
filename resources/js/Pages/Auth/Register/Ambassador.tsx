@@ -20,7 +20,7 @@ export default function Register({company}: {company: Company}) {
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
-        post(route("company.register", company.username))
+        post(route("regi", company.username))
     }
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {

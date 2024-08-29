@@ -12,9 +12,13 @@ export enum Status {
     INACTIVE,
 }
 
-
 export enum AmbassadorStatus {
     APPROVED = "APPROVED",
     DECLINED = "DECLINED",
     PENDING = "PENDING",
+}
+
+export enum SubscriberStatus {
+    VERIFIED = "Verified",
+    PROCESSING = "In Progress",
 }

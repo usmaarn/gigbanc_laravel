@@ -22,7 +22,14 @@ import {Button} from "@/Components/ui/button";
 import {ArrowDown} from "lucide-react";
 import {Input} from "@/Components/ui/input";
 
-export default function DataTable<Type>({data, columns}: {data: Type[], columns: ColumnDef<Type>[]}) {
+export default function DataTable<Type>({data, columns, ...props}: {
+    data: Type[],
+    columns: ColumnDef<Type>[],
+    title?: string,
+    description?: string,
+    searchable?: boolean,
+    withPagination?: boolean
+}) {
 
 
     const [sorting, setSorting] = useState<SortingState>([]);
@@ -44,17 +51,17 @@ export default function DataTable<Type>({data, columns}: {data: Type[], columns:
         <Card>
             <CardHeader className="flex flex-row gap-5">
                 <div className="">
-                    <CardTitle>Table</CardTitle>
-                    <CardDescription>Table Description</CardDescription>
+                    <CardTitle>{props?.title}</CardTitle>
+                    <CardDescription>{props?.description}</CardDescription>
                 </div>
-                <div className="flex-grow flex items-center justify-end">
+                {props.searchable && <div className="flex-grow flex items-center justify-end">
                     <Input
                         className="max-w-sm"
                         placeholder="Search Emails..."
                         value={(table.getColumn("email")?.getFilterValue() as string)}
                         onChange={e => table.getColumn("email")?.setFilterValue(e.target.value)}
                     />
-                </div>
+                </div>}
             </CardHeader>
             <CardContent className="">
                 <Table>
@@ -80,38 +87,42 @@ export default function DataTable<Type>({data, columns}: {data: Type[], columns:
                             </TableRow>
                         ))}
                     </TableBody>
-                    <TableFooter>
-                        {table.getFooterGroups().map(footerGroup => (
-                            <TableRow key={footerGroup.id}>
-                                {footerGroup.headers.map(footer => (
-                                    <TableHead key={footer.id}>
-                                        {flexRender(footer.column.columnDef.footer, footer.getContext())}
-                                    </TableHead>
-                                ))}
-                            </TableRow>
-                        ))}
-                    </TableFooter>
+                    {/*<TableFooter>*/}
+                    {/*    {table.getFooterGroups().map(footerGroup => (*/}
+                    {/*        <TableRow key={footerGroup.id}>*/}
+                    {/*            {footerGroup.headers.map(footer => (*/}
+                    {/*                <TableHead key={footer.id}>*/}
+                    {/*                    {flexRender(footer.column.columnDef.footer, footer.getContext())}*/}
+                    {/*                </TableHead>*/}
+                    {/*            ))}*/}
+                    {/*        </TableRow>*/}
+                    {/*    ))}*/}
+                    {/*</TableFooter>*/}
                 </Table>
             </CardContent>
-            <CardFooter>
+
+            {props?.withPagination && <CardFooter>
                 <Pagination>
                     <PaginationContent>
                         <PaginationItem>
                             <Button onClick={() => table.setPageIndex(0)} size="sm" variant="outline">First</Button>
                         </PaginationItem>
                         <PaginationItem>
-                            <Button onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()} size="sm" variant="outline">Prev</Button>
+                            <Button onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}
+                                    size="sm" variant="outline">Prev</Button>
                         </PaginationItem>
                         <PaginationItem>
-                            <Button onClick={() => table.nextPage()} disabled={!table.getCanNextPage()} size="sm" variant="outline">Next</Button>
+                            <Button onClick={() => table.nextPage()} disabled={!table.getCanNextPage()} size="sm"
+                                    variant="outline">Next</Button>
                         </PaginationItem>
                         <PaginationItem>
-                            <Button onClick={() => table.setPageIndex(table.getPageCount() - 1)} size="sm" variant="outline">Last</Button>
+                            <Button onClick={() => table.setPageIndex(table.getPageCount() - 1)} size="sm"
+                                    variant="outline">Last</Button>
                         </PaginationItem>
                     </PaginationContent>
                 </Pagination>
 
-            </CardFooter>
+            </CardFooter>}
         </Card>
     )
 }

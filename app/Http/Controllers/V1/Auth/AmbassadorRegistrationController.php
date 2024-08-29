@@ -1,38 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\V1;
+namespace App\Http\Controllers\V1\Auth;
 
 use App\Enums\UserType;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterAmbassadorRequest;
-use App\Http\Requests\V1\Company\NewAmbassadorRequest;
+use App\Http\Requests\V1\Auth\CreateAmbassadorAccountRequest;
 use App\Models\Company;
-use App\Models\User;
-use App\Traits\Ambassadors;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Inertia\Inertia;
 
-class CompanyController extends Controller
+class AmbassadorRegistrationController extends Controller
 {
-    use Ambassadors;
-    public function ambassadors(Request $request)
+    public function page()
     {
-        return Inertia::render('Dashboard/Ambassadors', [
-            "ambassadors" => User::all(),
-        ]);
+
     }
 
-    public function addAmbassador(NewAmbassadorRequest $request)
+    public function register(CreateAmbassadorAccountRequest $request, Company  $company)
     {
-        DB::transaction(function () use ($request) {
+        DB::transaction(function () use ($request, $company) {
             $request->validated();
-            $company = $request->user()->company;
-
             $user = $company->ambassadors()->create([
                 "first_name" => $request->firstName,
                 "last_name" => $request->lastName,
@@ -44,27 +35,8 @@ class CompanyController extends Controller
                 "type" => UserType::Ambassador->value,
             ]);
             event(new Registered($user));
+            Auth::login($user);
             return redirect(route("dashboard"));
         });
     }
-
-    public function register(Request $request, Company $company)
-    {
-        return Inertia::render('Company/RegisterAmbassador', [
-           "company" => $company,
-        ]);
-    }
-
-    public function storeAmbassador()
-    {
-        
-    }
-
-    public function landing(Request $request, Company $company)
-    {
-        return Inertia::render('Welcome', [
-           "company" => $company,
-        ]);
-    }
-
 }

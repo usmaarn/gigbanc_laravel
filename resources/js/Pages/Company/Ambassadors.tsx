@@ -1,4 +1,4 @@
-import {Ambassador} from "@/types/data";
+import {Ambassador} from "@/types";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import DataTable from "@/Components/DataTable";
 import {useMemo} from "react";
@@ -21,18 +21,8 @@ export default function Ambassadors({ambassadors}: {ambassadors: Ambassador[]}) 
         },
         {
             header: "Name",
-            accessorFn: row => `${row.first_name} ${row.last_name}`,
+            accessorFn: row => `${row.firstName} ${row.lastName}`,
             footer: "Name"
-        },
-        {
-            header: "First Name",
-            accessorKey: "first_name",
-            footer: "First Name"
-        },
-        {
-            header: "Last Name",
-            accessorKey: "last_name",
-            footer: "Last Name"
         },
         {
             header: ({column}) => (

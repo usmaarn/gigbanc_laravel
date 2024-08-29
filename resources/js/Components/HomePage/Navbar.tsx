@@ -17,11 +17,11 @@ export default function Navbar({name, loginUrl, registerUrl}: {
       <nav className="container px-3 h-full flex items-center justify-between">
         <ApplicationLogo name={name} />
 
-        <div className="hidden md:flex items-center gap-8 font-semibold uppercase text-sm tracking-widest">
-          <Link href="#">Home</Link>
-          <Link href="#">About</Link>
-          <Link href="#">Blogs</Link>
-        </div>
+        {/*<div className="hidden md:flex items-center gap-8 font-semibold uppercase text-sm tracking-widest">*/}
+        {/*  <Link href="#">Home</Link>*/}
+        {/*  <Link href="#">About</Link>*/}
+        {/*  <Link href="#">Blogs</Link>*/}
+        {/*</div>*/}
 
         {!auth?.user ? (
           <div className="flex items-center gap-4">

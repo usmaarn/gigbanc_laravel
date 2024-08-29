@@ -46,12 +46,16 @@ export type Subscriber = {
 
 export type Company = {
     id: number;
-    name?: string;
-    email?: string;
-    phone?: string;
-    username?: string;
-    ambassadors?: Ambassador[]
-    subscribers?: Subscriber[];
+    name: string;
+    username: string;
+    emailAddress: string;
+    subscribers: number;
+    ambassadors: number;
+    address: string;
+    logo: string;
+    description: string;
+    website: string;
+    createdAt: string;
 }
 
 

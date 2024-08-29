@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard");
+//    Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard");
 
     Route::prefix("/dashboard")->name("dashboard.")->group(function () {
         Route::get("/subscribers", [SubscribersController::class, 'index'])->name("subscribers");
@@ -47,6 +47,8 @@ Route::middleware("company")->group(function () {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/web/dashboard.php';
+require  __DIR__.'/web/company.php';
 
 
 Route::get("/{company:username}", [CompanyController::class, "landing"])->name("company.landing");

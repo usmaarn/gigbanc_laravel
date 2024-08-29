@@ -1,9 +1,10 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   darkMode: ["class"],
   content: [
     './resources/js/**/*.{ts,tsx}',
-    './resources/views/**/*.{ts,tsx}',
+    './resources/views/**/*.{ts,tsx}'
   ],
     prefix: "",
     theme: {

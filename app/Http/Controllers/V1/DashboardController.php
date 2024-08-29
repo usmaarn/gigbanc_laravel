@@ -18,7 +18,7 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard/Index', [
             "subscribers" => $this->getSubscribers(),
             "ambassadors" => $this->getAmbassadors(),
-            "companies" => Company::all(),
+            "organizations" => $request->user()->organizations()->get(),
             "subscribers_count" => count($this->getSubscribers()),
             "ambassadors_count" => auth()->user()->isCompany() ? auth()->user()->company->subscribers()->count() : 0,
         ]);

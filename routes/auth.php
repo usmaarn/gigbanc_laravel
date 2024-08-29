@@ -10,16 +10,23 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\V1\CompanyController;
+use App\Http\Controllers\Web\V1\Company\Auth\RegistrationController;
+use App\Http\Controllers\V1\Auth\AmbassadorRegistrationController;
+
 
 Route::get("/{company:username}/{user}/onboard", [\App\Http\Controllers\V1\SubscribersController::class, "onboardSubscriber"])->name("company.onboard");
 Route::post("/{company:username}/onboard", [\App\Http\Controllers\V1\SubscribersController::class, "store"])->name("company.onboard.store");
 
 Route::middleware('guest')->group(function () {
-    Route::get('register', [\App\Http\Controllers\V1\Auth\RegisterController::class, 'index'])
-                ->name('register');
 
-    Route::get("/{company:username}/register", [CompanyController::class, "register"])->name("company.register");
-    Route::post("/{company:username}/register", [CompanyController::class, "storeAmbassador"])->name("company.register");
+    // Company Organization
+    Route::get('register', [RegistrationController::class, 'registrationPage'])->name('register');
+    Route::post('register', [RegistrationController::class, 'register'])->name('register');
+
+    //Company Ambassador
+    Route::get("/{company:username}/register", [AmbassadorRegistrationController::class, "page"])
+        ->name("ambassador.register");
+    Route::post("/{company:username}/register", [AmbassadorRegistrationController::class, "register"])->name("company.register");
 
     Route::post('register', [\App\Http\Controllers\V1\Auth\RegisterController::class, 'store']);
 

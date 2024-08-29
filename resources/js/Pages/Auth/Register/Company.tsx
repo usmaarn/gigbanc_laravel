@@ -7,7 +7,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo";
 import {ChangeEvent} from "react";
 
 
-export default function Register() {
+export default function Company() {
     const {data, setData, post, processing, errors} = useForm({
         firstName: "",
         lastName: "",

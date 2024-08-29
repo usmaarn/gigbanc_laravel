@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(["guest"])->group(function () {
-    Route::get("/register", [])
-});
+Route::middleware(["auth", "verified", "company"])->group(function () {
 
-Route::group(['middleware' => ['auth', 'company']], function () {
+    Route::prefix("/dashboard")->group(function (){
+        Route::get("/ambassadors", [])->name("dashboard.ambassadors");
+    });
 
 });

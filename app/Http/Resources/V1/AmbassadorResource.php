@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\V1;
 
+use App\Enums\SubscriptionStatus;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -25,9 +26,10 @@ class AmbassadorResource extends JsonResource
             "joinDate" => $this->organizations->count(),
             "subscribers" => [
                 "total" => $this->subscribers->count(),
-                "verified" => "",
-                "unverified" => "",
-            ]
+                "verified" => $this->subscribers()->where("status", SubscriptionStatus::VERIFIED->value)->count(),
+                "processing" => $this->subscribers()->where("status", SubscriptionStatus::PROCESSING->value)->count(),
+            ],
+            "createdAt" => $this->created_at
         ];
     }
 }
