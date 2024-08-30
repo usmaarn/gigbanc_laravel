@@ -1,10 +1,22 @@
-import {ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent} from "@/Components/ui/chart";
-import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/Components/ui/card";
-import {Bar, BarChart, CartesianGrid, XAxis} from "recharts";
-import {TrendingUp} from "lucide-react";
-import {Subscriber} from "@/types/data";
-import {usePage} from "@inertiajs/react";
-import {PageProps} from "@/types";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/Components/ui/card";
+import {
+    ChartConfig,
+    ChartContainer,
+    ChartTooltip,
+    ChartTooltipContent,
+} from "@/Components/ui/chart";
+import { PageProps } from "@/types";
+import { Subscriber } from "@/types/data";
+import { usePage } from "@inertiajs/react";
+import { Bar, BarChart, CartesianGrid } from "recharts";
+import { DatePicker } from "../form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const chartData = [
     { month: "January", desktop: 186 },
@@ -13,26 +25,36 @@ const chartData = [
     { month: "April", desktop: 73 },
     { month: "May", desktop: 209 },
     { month: "June", desktop: 214 },
-]
+];
 
 const chartConfig = {
     desktop: {
         label: "Desktop",
         color: "hsl(var(--chart-1))",
     },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
-export function BarChartComponent({title}: {
-    title: string;
-}) {
+export function BarChartComponent({ title }: { title: string }) {
+    const { subscribers }: PageProps<{ subscribers: Subscriber[] }> =
+        usePage().props;
 
-    const {subscribers}: PageProps<{subscribers: Subscriber[]}> = usePage().props;
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation({
+        
+    })
 
     return (
         <Card>
-            <CardHeader>
-                <CardTitle className="capitalize">{title}</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
+            <CardHeader className="md:flex-row gap-5 items-center">
+                <div className="">
+                    <CardTitle className="capitalize">{title}</CardTitle>
+                    <CardDescription>January - June 2024</CardDescription>
+                </div>
+                <div className="flex gap-3 justify-end flex-grow">
+                    <DatePicker />
+                    <DatePicker />
+                </div>
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig}>
@@ -49,10 +71,14 @@ export function BarChartComponent({title}: {
                             cursor={false}
                             content={<ChartTooltipContent hideLabel />}
                         />
-                        <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8} />
+                        <Bar
+                            dataKey="desktop"
+                            fill="var(--color-desktop)"
+                            radius={8}
+                        />
                     </BarChart>
                 </ChartContainer>
             </CardContent>
         </Card>
-    )
+    );
 }
