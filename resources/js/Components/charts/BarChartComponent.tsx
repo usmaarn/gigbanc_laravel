@@ -35,14 +35,6 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function BarChartComponent({ title }: { title: string }) {
-    const { subscribers }: PageProps<{ subscribers: Subscriber[] }> =
-        usePage().props;
-
-    const queryClient = useQueryClient();
-
-    const mutation = useMutation({
-        
-    })
 
     return (
         <Card>

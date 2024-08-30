@@ -6,6 +6,7 @@ import axios, {
     AxiosRequestConfig,
     AxiosResponse,
 } from "axios";
+import { config } from "./config";
 
 type ApiError<T = {}> = { [key: string]: string } | null;
 type HttpClientResponse<T extends ApiError | null = null> = {
@@ -16,17 +17,17 @@ type HttpClientResponse<T extends ApiError | null = null> = {
 
 class HttpClient {
     private http = axios.create({
-        baseURL: process.en + "/api/v1",
+        baseURL: config.appUrl + "/api/v1",
     });
 
     public withToken() {
         return this;
     }
 
-    public async get<T>(
+    public async get<T extends ApiError>(
         url: string,
         options: AxiosRequestConfig = {}
-    ): Promise<T | null> {
+    ): Promise<HttpClientResponse<T>> {
         const response = await this.http.get(url, options).catch((err) => {
             if (err instanceof AxiosError) console.log(err?.response?.data);
             else console.log(err?.message);

@@ -1,10 +1,13 @@
 import {Icon} from "@iconify/react";
 import {Card, CardContent} from "@/Components/ui/card";
 import {usePage} from "@inertiajs/react";
+import {useEffect} from "react";
+import {getSubscribers} from "@/lib/actions/subscriber";
 
-export default  function Stats(){
+export default function Stats(){
 
     const {ambassadorsCount, subscribersCount, payouts} = usePage().props;
+
 
     return(
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-1">

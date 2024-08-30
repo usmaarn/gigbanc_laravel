@@ -2,16 +2,15 @@
 
 namespace Database\Seeders;
 
-use App\Enums\AmbassadorStatus;
 use App\Enums\UserType;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Subscriber;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -46,6 +45,9 @@ class DatabaseSeeder extends Seeder
 
         //Create Subscribers
         Subscriber::factory()->count(1000)->create();
+        Subscriber::factory()->count(50)->create([
+            "company_id" => 1,
+        ]);
 
         echo "Database Seeded Successfully!\n";
     }

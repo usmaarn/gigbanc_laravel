@@ -1,3 +1,4 @@
 export const config = {
-    appName: "Growthacy",
+    appName: import.meta.env.VITE_APP_NAME ?? "Growthacy",
+    appUrl: import.meta.env.VITE_APP_URL,
 };

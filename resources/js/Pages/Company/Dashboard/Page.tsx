@@ -4,6 +4,7 @@ import {BarChartComponent} from "@/Components/charts/BarChartComponent";
 import SubscribersTable from "@/Components/Tables/SubscribersTable";
 import TopAmbassador from "@/Components/Tables/TopAmbassador";
 import {PageProps, Subscriber} from "@/types";
+import {SubscribersChart} from "@/Components/charts/SubscribersChart";
 
 export default function Page({recentSubscribers}: PageProps<{
     recentSubscribers: Subscriber[]
@@ -13,7 +14,7 @@ export default function Page({recentSubscribers}: PageProps<{
             <section className="space-y-5">
                 <Stats />
                 <section className="grid md:grid-cols-2 gap-2">
-                    <BarChartComponent title="Subscriptions"/>
+                    <SubscribersChart title="Subscriptions"/>
                     <BarChartComponent title="Onboarded"/>
                 </section>
                 <SubscribersTable subscribers={recentSubscribers} title="Recent Subscribers" />

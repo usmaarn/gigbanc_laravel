@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId("user_id")->constrained("users")->nullOnDelete();
             $table->foreignId("category_id")->constrained("categories")->nullOnDelete();
             $table->string("type");
-            $table->string("status")->default(\App\Enums\SubscriptionStatus::NOT_ONBOARDED->value);
+            $table->string("status")->default(\App\Enums\SubscriptionStatus::PROCESSING->value);
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamp("phone_verified_at")->nullable();
             $table->timestamps();
