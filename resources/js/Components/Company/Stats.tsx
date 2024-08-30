@@ -1,12 +1,16 @@
 import {Icon} from "@iconify/react";
 import {Card, CardContent} from "@/Components/ui/card";
 import {usePage} from "@inertiajs/react";
-import {useEffect} from "react";
-import {getSubscribers} from "@/lib/actions/subscriber";
+import {PageProps} from "@/types";
 
 export default function Stats(){
 
-    const {ambassadorsCount, subscribersCount, payouts} = usePage().props;
+    // @ts-ignore
+    const {ambassadorsCount, subscribersCount, payouts}: PageProps & {
+        ambassadorsCount: number;
+        subscribersCount: number;
+        payouts: number;
+    } = usePage().props;
 
 
     return(
