@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\V1\Company\CompanyAmbassadorController;
-use App\Http\Controllers\V1\Web\Company\CompanySettingsController;
-use App\Http\Controllers\V1\Company\CompanyController;
+use App\Http\Controllers\Web\V1\Company\CompanyAmbassadorController;
+use App\Http\Controllers\Web\V1\Company\CompanyController;
+use App\Http\Controllers\Web\V1\Company\CompanySettingsController;
 use Illuminate\Support\Facades\Route;
-
 
 
 Route::middleware(["auth", "verified", "company"])->group(function () {

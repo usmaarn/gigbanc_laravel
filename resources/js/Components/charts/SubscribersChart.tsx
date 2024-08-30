@@ -6,6 +6,7 @@ import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {getSubscribers} from "@/lib/actions/subscriber";
 import {useEffect, useState} from "react";
 import {Subscriber} from "@/types";
+import {http} from "@/lib/http-client";
 
 const chartData = [
     { month: "January", desktop: 186 },
@@ -30,19 +31,11 @@ export function SubscribersChart({ title }: { title: string }) {
 
     const {data, isLoading}: UseQueryResult<{data: Subscriber[]}> = useQuery({
         queryKey: ["subscribers"],
-        queryFn: () => getSubscribers()
+        queryFn: () => http.get(route("frontend.subscribers.chart")).then((res) => res.data),
     });
 
     useEffect(() => {
-        let groups = null;
-        if (Array.isArray(data) && data.length > 0) {
-            groups = Object.groupBy(data, ({createdAt}:Subscriber) => createdAt)
-            groups = Object.entries(groups).map(([key, value]) => ({
-                date: new Date(key).toLocaleDateString(), count: value.length
-            }))
-        }
-        setChartData(groups)
-        console.log(groups)
+
     }, [dateStart, dateEnd]);
 
     return (
@@ -69,34 +62,25 @@ function Chart({data}){
     console.log(data)
     return(
         <ChartContainer config={chartConfig}>
-            <LineChart
-                accessibilityLayer
-                data={data}
-                margin={{
-                    left: 12,
-                    right: 12,
-                }}
-            >
+            <BarChart accessibilityLayer data={data}>
                 <CartesianGrid vertical={false} />
                 {/*<XAxis*/}
-                {/*    dataKey="day"*/}
+                {/*    dataKey="month"*/}
                 {/*    tickLine={false}*/}
+                {/*    tickMargin={1}*/}
                 {/*    axisLine={false}*/}
-                {/*    tickMargin={8}*/}
                 {/*    tickFormatter={(value) => value.slice(0, 3)}*/}
                 {/*/>*/}
                 <ChartTooltip
                     cursor={false}
                     content={<ChartTooltipContent hideLabel />}
                 />
-                <Line
-                    dataKey="count"
-                    type="linear"
-                    stroke="var(--color-desktop)"
-                    strokeWidth={2}
-                    dot={false}
+                <Bar
+                    dataKey="desktop"
+                    fill="var(--color-desktop)"
+                    radius={8}
                 />
-            </LineChart>
+            </BarChart>
         </ChartContainer>
     )
 }

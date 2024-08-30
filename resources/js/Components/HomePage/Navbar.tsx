@@ -1,4 +1,4 @@
-import {Link, usePage} from "@inertiajs/react";
+import {Head, Link, usePage} from "@inertiajs/react";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import {Button} from "@/Components/ui/button";
 import UserDropdown from "@/Components/UserDropdown";
@@ -13,23 +13,18 @@ export default function Navbar({name, loginUrl, registerUrl}: {
     const {auth}: PageProps = usePage().props;
 
   return (
-    <header className="h-[80px] border-b bg-white">
+    <header className="h-[80px] bg-white">
+        <Head title="Home" />
       <nav className="container px-3 h-full flex items-center justify-between">
         <ApplicationLogo name={name} />
-
-        {/*<div className="hidden md:flex items-center gap-8 font-semibold uppercase text-sm tracking-widest">*/}
-        {/*  <Link href="#">Home</Link>*/}
-        {/*  <Link href="#">About</Link>*/}
-        {/*  <Link href="#">Blogs</Link>*/}
-        {/*</div>*/}
 
         {!auth?.user ? (
           <div className="flex items-center gap-4">
             <Link href={loginUrl}>
-              <Button variant="outline">Login</Button>
+              <Button size="lg" variant="outline" className="border-2 border-primary text-primary">Login</Button>
             </Link>
             <Link href={registerUrl} className="hidden sm:inline">
-              <Button>Register</Button>
+              <Button size="lg">Register</Button>
             </Link>
           </div>
         ) : (

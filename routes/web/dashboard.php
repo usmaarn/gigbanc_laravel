@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\V1\Dashboard\DashboardController;
-use App\Http\Controllers\V1\Web\Dashboard\SettingsController;
-use App\Http\Controllers\V1\Web\Dashboard\SubscribersController;
-use App\Http\Controllers\V1\Web\Dashboard\LeaderboardController;
+use App\Http\Controllers\Web\V1\Dashboard\LeaderboardController;
+use App\Http\Controllers\Web\V1\Dashboard\SettingsController;
+use App\Http\Controllers\Web\V1\Dashboard\SubscribersController;
+use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(["auth", "verified"])->group(function () {
@@ -12,7 +12,6 @@ Route::middleware(["auth", "verified"])->group(function () {
    Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard");
 
    Route::group(['namespace' => 'Dashboard', 'prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
-
 
        // Settings
        Route::get("/settings", [SettingsController::class, "page"])->name("settings");

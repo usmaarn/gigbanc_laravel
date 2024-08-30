@@ -8,9 +8,9 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Controllers\V1\Auth\AmbassadorRegistrationController;
-use App\Http\Controllers\Web\V1\Company\Auth\RegistrationController;
-use App\Http\Controllers\V1\SubscribersController;
+use App\Http\Controllers\Web\V1\Auth\AmbassadorRegistrationController;
+use App\Http\Controllers\Web\V1\Auth\RegistrationController;
+use App\Http\Controllers\Web\V1\SubscribersController;
 use Illuminate\Support\Facades\Route;
 
 

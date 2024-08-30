@@ -45,9 +45,6 @@ class DatabaseSeeder extends Seeder
 
         //Create Subscribers
         Subscriber::factory()->count(1000)->create();
-        Subscriber::factory()->count(50)->create([
-            "company_id" => 1,
-        ]);
 
         echo "Database Seeded Successfully!\n";
     }
