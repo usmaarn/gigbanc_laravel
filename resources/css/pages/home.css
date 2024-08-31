@@ -1,0 +1,27 @@
+.hero-section{
+    /*background-image: linear-gradient(to right, #FFFFFF, rgba(63, 79, 198, 0)), url('/growth.jpg');*/
+    background-position: right;
+}
+
+.home-page{
+    .section{
+        @apply py-10 md:py-20 border-b-8;
+
+        &:nth-of-type(even) .container{
+            @apply md:odd:flex-row-reverse;
+        }
+
+        .container {
+            @apply flex flex-col items-center gap-10;
+            .content{
+                @apply space-y-10;
+                h3{
+                    @apply text-4xl md:text-5xl;
+                }
+                p{
+                    @apply text-lg md:text-2xl;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+.btn, .btn-primary, .btn-outline-primary {
+    @apply px-8 py-3 inline-block border-2 font-medium hover:bg-transparent text-center;
+}
+
+.btn{
+    @apply border-white bg-white text-primary hover:text-white;
+}
+
+.btn-primary{
+    @apply border-primary bg-primary text-white hover:text-primary;
+}
+
+.btn-secondary{
+    @apply border-secondary bg-secondary text-white hover:text-secondary;
+}
+
+.btn-outline-primary{
+    @apply border-primary bg-transparent hover:bg-primary text-primary hover:text-white;
+}

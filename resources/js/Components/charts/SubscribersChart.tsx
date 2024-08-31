@@ -1,26 +1,25 @@
 import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/Components/ui/card";
 import {ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent,} from "@/Components/ui/chart";
-import {Bar, BarChart, CartesianGrid, Line, LineChart, XAxis} from "recharts";
+import {Bar, BarChart, CartesianGrid, XAxis} from "recharts";
 import {DatePicker} from "../form";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {getSubscribers} from "@/lib/actions/subscriber";
 import {useEffect, useState} from "react";
 import {Subscriber} from "@/types";
 import {http} from "@/lib/http-client";
 
 const chartData = [
-    { month: "January", desktop: 186 },
-    { month: "February", desktop: 305 },
-    { month: "March", desktop: 237 },
-    { month: "April", desktop: 73 },
-    { month: "May", desktop: 209 },
-    { month: "June", desktop: 214 },
+    { date: "January", subscribers: 1861 },
+    { date: "February", subscribers: 305 },
+    { date: "March", subscribers: 237 },
+    { date: "April", subscribers: 73 },
+    { date: "May", subscribers: 209 },
+    { date: "June", subscribers: 214 },
 ];
 
 const chartConfig = {
-    desktop: {
+    subscribers: {
         label: "Subscribers",
-        color: "hsl(var(--chart-1))",
+        color: "#3F4FC6",
     },
 } satisfies ChartConfig;
 
@@ -64,20 +63,20 @@ function Chart({data}){
         <ChartContainer config={chartConfig}>
             <BarChart accessibilityLayer data={data}>
                 <CartesianGrid vertical={false} />
-                {/*<XAxis*/}
-                {/*    dataKey="month"*/}
-                {/*    tickLine={false}*/}
-                {/*    tickMargin={1}*/}
-                {/*    axisLine={false}*/}
-                {/*    tickFormatter={(value) => value.slice(0, 3)}*/}
-                {/*/>*/}
+                <XAxis
+                    dataKey="date"
+                    tickLine={false}
+                    tickMargin={1}
+                    axisLine={false}
+                    tickFormatter={(value) => value.slice(0, 3)}
+                />
                 <ChartTooltip
                     cursor={false}
                     content={<ChartTooltipContent hideLabel />}
                 />
                 <Bar
-                    dataKey="desktop"
-                    fill="var(--color-desktop)"
+                    dataKey="subscribers"
+                    fill="var(--color-subscribers)"
                     radius={8}
                 />
             </BarChart>

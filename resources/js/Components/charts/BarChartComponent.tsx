@@ -1,75 +1,43 @@
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/Components/ui/card";
-import {
-    ChartConfig,
-    ChartContainer,
-    ChartTooltip,
-    ChartTooltipContent,
-} from "@/Components/ui/chart";
-import { PageProps } from "@/types";
-import { Subscriber } from "@/types/data";
-import { usePage } from "@inertiajs/react";
-import { Bar, BarChart, CartesianGrid } from "recharts";
-import { DatePicker } from "../form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/Components/ui/card";
+import {Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
+import {DatePicker} from "../form";
 
-const chartData = [
-    { month: "January", desktop: 186 },
-    { month: "February", desktop: 305 },
-    { month: "March", desktop: 237 },
-    { month: "April", desktop: 73 },
-    { month: "May", desktop: 209 },
-    { month: "June", desktop: 214 },
-];
 
-const chartConfig = {
-    desktop: {
-        label: "Desktop",
-        color: "hsl(var(--chart-1))",
-    },
-} satisfies ChartConfig;
-
-export function BarChartComponent({ title }: { title: string }) {
+export function BarChartComponent({ title, data, dataKey, onDateChange, showDateRange, className, height}: {
+    title: string;
+    className?: string;
+    data: object[];
+    dataKey: string;
+    onDateChange?: ({ start: Date, end: Date }) => void;
+    showDateRange?: boolean;
+    height?: string;
+}) {
 
     return (
         <Card>
-            <CardHeader className="md:flex-row gap-5 items-center">
+            <CardHeader className="xl:flex-row xl:gap-5 xl:items-center">
                 <div className="">
                     <CardTitle className="capitalize">{title}</CardTitle>
                     <CardDescription>January - June 2024</CardDescription>
                 </div>
-                <div className="flex gap-3 justify-end flex-grow">
-                    <DatePicker />
-                    <DatePicker />
-                </div>
+                {showDateRange &&
+                    <div className="flex gap-3 justify-end flex-grow">
+                        <DatePicker/>
+                        <DatePicker/>
+                    </div>
+                }
             </CardHeader>
-            <CardContent>
-                <ChartContainer config={chartConfig}>
-                    <BarChart accessibilityLayer data={chartData}>
-                        <CartesianGrid vertical={false} />
-                        {/*<XAxis*/}
-                        {/*    dataKey="month"*/}
-                        {/*    tickLine={false}*/}
-                        {/*    tickMargin={1}*/}
-                        {/*    axisLine={false}*/}
-                        {/*    tickFormatter={(value) => value.slice(0, 3)}*/}
-                        {/*/>*/}
-                        <ChartTooltip
-                            cursor={false}
-                            content={<ChartTooltipContent hideLabel />}
-                        />
-                        <Bar
-                            dataKey="desktop"
-                            fill="var(--color-desktop)"
-                            radius={8}
-                        />
-                    </BarChart>
-                </ChartContainer>
+            <CardContent className={className}>
+                <ResponsiveContainer width="100%" height="100%">
+                    {data.length <= 0 ? <p>No Result yet...</p> :
+                        <BarChart data={data}>
+                            <Bar dataKey={"subscribers"} fill="#3F4FC6"/>
+                            <Tooltip/>
+                            <YAxis dataKey="subscribers" tickLine={false}/>
+                            <XAxis dataKey="date" tickLine={false}/>
+                        </BarChart>
+                    }
+                </ResponsiveContainer>
             </CardContent>
         </Card>
     );
