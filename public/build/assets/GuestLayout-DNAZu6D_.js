@@ -1,0 +1,1 @@
+import{j as e}from"./app-DURj0zGn.js";import{A as r}from"./button-FY0AyK-4.js";function i({children:s,name:t}){return e.jsxs("section",{className:"max-w-screen min-h-screen py-10 md:py-20 px-3 flex flex-col items-center justify-center gap-5",children:[e.jsx(r,{name:t}),s]})}export{i as G};

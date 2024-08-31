@@ -1,19 +1,26 @@
 import Navbar from "@/Components/HomePage/Navbar";
 import {Company} from "@/types/data";
-import HeroSection from "@/Pages/Home/HeroSection";
 import {Link} from "@inertiajs/react";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import {Input} from "@/Components/ui/input";
 import {Button} from "@/Components/ui/button";
+import HeroSection from "@/Components/HomePage/HeroSection";
 
 export default function Page({company}: {company: Company}){
     const loginUrl = route("login");
     const registerUrl = company ? route("ambassador.register", company?.username) : route("register");
 
     return(
+        <main>
+            <Navbar loginUrl={loginUrl} registerUrl={registerUrl} name={company?.name} />
+            <HeroSection loginUrl={loginUrl} registerUrl={registerUrl} name={company?.name} />
+        </main>
+    )
+
+    return(
         <main className="home-page">
             <Navbar loginUrl={loginUrl} registerUrl={registerUrl} name={company?.name}/>
-            <HeroSection/>
+            {/*<HeroSection/>*/}
             <section className="py-10 bg-primary">
                 <div className="container flex flex-col md:flex-row gap-10  md:items-center justify-between">
                     <h4 className="text-2xl text-white font-extralight">
@@ -93,8 +100,9 @@ export default function Page({company}: {company: Company}){
                             Integrations that tap into the tools your teams use everyday.
                         </h3>
                         <p className="text-lg md:text-2xl text-white font-extralight">
-                            Unlock flexibility with out of the box integrations for common systems and powerful,
-                            robust APIs and ETLs to harness all your data, work how you want,
+                            Unlock flexibility with out of the box integrations
+                            for common systems and powerful, robust APIs and
+                            ETLs to harness all your data, work how you want,
                             take action, and transform experiences.
                         </p>
                         <Link href="#" className="btn font-semibold">

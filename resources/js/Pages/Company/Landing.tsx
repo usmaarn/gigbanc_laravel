@@ -3,7 +3,7 @@ import HeroSection from "@/Components/HomePage/HeroSection";
 import {Company} from "@/types/data";
 
 
-export default function Welcome({company}: {company: Company}) {
+export default function Landing({company}: {company: Company}) {
 
     const loginUrl = route("login");
     const registerUrl = company ? route("ambassador.register", company?.username) : route("register");
