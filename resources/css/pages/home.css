@@ -8,11 +8,11 @@
         @apply py-10 md:py-20 border-b-8;
 
         &:nth-of-type(even) .container{
-            @apply md:odd:flex-row-reverse;
+            @apply md:flex-row-reverse;
         }
 
         .container {
-            @apply flex flex-col items-center gap-10;
+            @apply flex flex-col md:flex-row items-center gap-10;
             .content{
                 @apply space-y-10;
                 h3{

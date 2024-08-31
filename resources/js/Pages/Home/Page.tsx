@@ -108,7 +108,7 @@ export default function Page({company}: {company: Company}){
                 <div className="py-3 bg-primary/20"></div>
                 <div className="py-5 bg-primary/10"></div>
                 <div className="container py-20">
-                    <div className="flex flex-col items-center gap-5 justify-between">
+                    <div className="flex flex-col md:flex-row items-center gap-5 justify-between">
                         <ApplicationLogo/>
                         <div className="flex gap-1 mb-5">
                             <Input placeholder="Email Address" className="h-11"/>
