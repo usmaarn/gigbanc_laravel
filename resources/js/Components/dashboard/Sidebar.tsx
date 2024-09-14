@@ -29,9 +29,9 @@ export default function Sidebar({open, onClose}: {
                                   href={route("dashboard.subscribers")}/>
                     <SidebarItem label="Leaderboard" icon="material-symbols:leaderboard-outline"
                                  href={route("dashboard.leaderboard")}/>
-                    {/*{!auth.isCompany &&*/}
-                    {/*    <SidebarItem label="Organizations" icon="material-symbols:leaderboard-outline"*/}
-                    {/*              href={route("dashboard")}/>}*/}
+                    {!auth.isCompany &&
+                        <SidebarItem label="Organizations" icon="material-symbols:leaderboard-outline"
+                                  href={route("dashboard.companies")}/>}
                 </SidebarMenuGroup>
 
                 {/*{auth?.isCompany &&*/}

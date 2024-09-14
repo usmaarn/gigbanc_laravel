@@ -20,7 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->alias([
            "company" => \App\Http\Middleware\EnsureUserIsCompany::class,
-           "agent" => \App\Http\Middleware\EnsureUserIsAgent::class,
+           "ambassador" => \App\Http\Middleware\EnsureUserIsAmbassador::class,
            "admin" => \App\Http\Middleware\EnsureUserIsAdmin::class,
         ]);
 

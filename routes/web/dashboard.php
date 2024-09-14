@@ -4,6 +4,7 @@ use App\Http\Controllers\V1\Dashboard\DashboardController;
 use App\Http\Controllers\Web\V1\Dashboard\LeaderboardController;
 use App\Http\Controllers\Web\V1\Dashboard\SettingsController;
 use App\Http\Controllers\Web\V1\Dashboard\SubscribersController;
+use App\Http\Controllers\Web\V1\AmbassadorController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,12 +18,14 @@ Route::middleware(["auth", "verified"])->group(function () {
        Route::get("/settings", [SettingsController::class, "page"])->name("settings");
        Route::patch("/settings", [SettingsController::class, "update"])->name("settings");
 
-
        //Subscribers
        Route::get("/subscribers", [SubscribersController::class, "index"])->name("subscribers");
 
-
        //Leaderboard
        Route::get("/leaderboard", [LeaderboardController::class, "all"])->name("leaderboard");
+
+       //Companies
+       Route::get("/companies", [AmbassadorController::class, "companies"])->name("companies")
+       ->middleware("ambassador");
    });
 });

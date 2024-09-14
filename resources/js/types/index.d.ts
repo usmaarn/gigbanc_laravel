@@ -60,6 +60,7 @@ export type Company = {
     ambassadors: number;
     address: string;
     logo: string;
+    mode: string;
     description: string;
     website: string;
     createdAt: string;

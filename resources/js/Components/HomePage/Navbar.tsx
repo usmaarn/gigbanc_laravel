@@ -13,7 +13,7 @@ export default function Navbar({name, loginUrl, registerUrl}: {
     const {auth}: PageProps = usePage().props;
 
   return (
-    <header className="h-[80px] bg-white border-b-8">
+    <header className="h-[80px] bg-white">
         <Head title="Home" />
       <nav className="container px-3 h-full flex items-center justify-between">
         <ApplicationLogo name={name} />

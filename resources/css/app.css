@@ -1,11 +1,13 @@
-@import "./fonts.css";
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=SUSE:wght@100..800&display=swap');
 
 @import "components/button.css";
+
+@import "layouts/index.css";
 
 @import "pages/home.css";
 
 body {
-    font-family: "Museo Sans", sans-serif;
+    font-family: "Rubik", sans-serif;
     font-optical-sizing: auto;
 }
 
