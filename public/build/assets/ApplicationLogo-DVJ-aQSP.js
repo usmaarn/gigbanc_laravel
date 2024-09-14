@@ -1,0 +1,1 @@
+import{q as s,j as t,a as o}from"./app-BBgNcKgh.js";function i({name:a,className:n}){const{company:e}=s().props;return t.jsx(o,{href:e?route("company.landing",e.username):"/",className:"flex items-center gap-2 text-2xl md:text-3xl tracking-tighter "+n,children:t.jsx("span",{className:"font-semibold capitalize",children:a??"Growthacy"})})}export{i as A};
